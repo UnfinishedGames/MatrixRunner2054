@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Node currentNode;
 
-    public GameObject leftNode;
-    public GameObject rightNode;
-    public GameObject currentNode;
 
     // Use this for initialization
     void Start()
@@ -19,22 +17,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (leftNode != null)
-            {
-                rightNode = currentNode;
-                currentNode = leftNode;
-                leftNode = null;
-            }
+            currentNode = currentNode.getNeighbour(Direction.Left);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (rightNode != null)
-            {
-                leftNode = currentNode;
-                currentNode = rightNode;
-                rightNode = null;
-            }
+            currentNode = currentNode.getNeighbour(Direction.Right);
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            currentNode = currentNode.getNeighbour(Direction.Up);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            currentNode = currentNode.getNeighbour(Direction.Down);
         }
 
         UpdateView();
@@ -42,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateView()
     {
-        this.transform.position = currentNode.transform.position;
+        if (currentNode != null)
+        {
+            this.transform.position = currentNode.transform.position;
+        }
     }
 }
