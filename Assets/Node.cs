@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Node : MonoBehaviour {
@@ -8,30 +9,21 @@ public class Node : MonoBehaviour {
     public GameObject upObject;
     public GameObject downObject;
 
-    private Node leftNode;
-    private Node rightNode;
-    private Node upNode;
-    private Node downNode;
-
+    private Dictionary<Direction, Node> possibleDirections;
     // Use this for initialization
     void Start()
     {
-        if (leftObject != null)
-        {
-            leftNode = leftObject.GetComponent<Node>();
-        }
-        if (rightObject != null)
-        {
-            rightNode = rightObject.GetComponent<Node>();
-        }
-        if (upObject != null)
-        {
-            upNode = upObject.GetComponent<Node>();
-        }
-        if (downObject != null)
-        {
-            downNode = downObject.GetComponent<Node>();
-        }
+        possibleDirections = new Dictionary<Direction, Node>();
+
+        possibleDirections.Add(Direction.Left, NodeFromObjectOrMyself(leftObject));
+        possibleDirections.Add(Direction.Right, NodeFromObjectOrMyself(rightObject));
+        possibleDirections.Add(Direction.Up, NodeFromObjectOrMyself(upObject));
+        possibleDirections.Add(Direction.Down, NodeFromObjectOrMyself(downObject));
+    }
+
+    private Node NodeFromObjectOrMyself(GameObject gameObj)
+    {
+        return gameObj != null ? gameObj.GetComponent<Node>() : this;
     }
     	
 	// Update is called once per frame
@@ -41,30 +33,6 @@ public class Node : MonoBehaviour {
 
     internal Node getNeighbour(Direction direction)
     {
-        Node returnNode = this;
-        switch(direction)
-        {
-            case Direction.Left:
-                {
-                    returnNode = leftNode ?? this;
-                    break;
-                }
-            case Direction.Right:
-                {
-                    returnNode = rightNode ?? this;
-                    break;
-                }
-            case Direction.Up:
-                {
-                    returnNode = upNode ?? this;
-                    break;
-                }
-            case Direction.Down:
-                {
-                    returnNode = downNode ?? this;
-                    break;
-                }
-        }
-        return returnNode;
+        return possibleDirections[direction];
     }
 }
