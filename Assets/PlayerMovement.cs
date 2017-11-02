@@ -5,15 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Node currentNode;
-    private bool hasMoved = false;
+    public LevelManager levelManager;
 
-    private Dictionary<KeyCode, Direction> translateKey = new Dictionary<KeyCode, Direction>
-    {
-        {KeyCode.UpArrow, Direction.Up },
-        {KeyCode.DownArrow, Direction.Down },
-        {KeyCode.LeftArrow, Direction.Left },
-        {KeyCode.RightArrow, Direction.Right }
-    };
+    private bool hasMoved = false;
 
     Func<KeyCode, bool> KeyWasReleased = (KeyCode input) => Input.GetKeyUp(input);
     Func<KeyCode, bool> KeyWasPressed = (KeyCode input) => Input.GetKeyDown(input);
@@ -27,10 +21,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         hasMoved = CheckKeyUp(hasMoved);
-        if (hasMoved) { return; }
-        SetCurrentNode();
-        hasMoved = CheckKeyDown(hasMoved);
-        UpdateView();
+        if (!hasMoved)
+        {
+            SetCurrentNode();
+            hasMoved = CheckKeyDown(hasMoved);
+            UpdateView();
+        }
     }
 
     private bool CheckKeyUp(bool moved)
@@ -57,22 +53,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            currentNode = currentNode.getNeighbour(Direction.Left);
+            currentNode = levelManager.TryToMovePlayer(Direction.Left, currentNode);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            currentNode = currentNode.getNeighbour(Direction.Right);
+            currentNode = levelManager.TryToMovePlayer(Direction.Right, currentNode);
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            currentNode = currentNode.getNeighbour(Direction.Up);
+            currentNode = levelManager.TryToMovePlayer(Direction.Up, currentNode);
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            currentNode = currentNode.getNeighbour(Direction.Down);
+            currentNode = levelManager.TryToMovePlayer(Direction.Down, currentNode);
         }
     }
     

@@ -1,7 +1,9 @@
-﻿internal enum Direction
+﻿public enum Direction
 {
     Right,
     Left,
     Down,
     Up
 }
+
+
