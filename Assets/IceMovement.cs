@@ -2,14 +2,13 @@
 
 public class IceMovement : MonoBehaviour
 {
+    const int numberOfDirections = 3;
+    
     public Node currentNode;
 
     private bool canMove = false;
     private System.Random random;
-
-    const int numberOfDirections = 3;
-
-    // Use this for initialization
+    
     void Start()
     {
         random = new System.Random((int)System.DateTime.Now.Ticks);
@@ -23,6 +22,11 @@ public class IceMovement : MonoBehaviour
             Move();
         }
     }
+    
+    public void YouCanMoveNext()
+    {
+        canMove = true;
+    }
 
     private void Move()
     {
@@ -30,11 +34,6 @@ public class IceMovement : MonoBehaviour
         currentNode = currentNode.getNeighbour((Direction)newDirection);
         canMove = false;
         UpdateView();
-    }
-
-    public void YouCanMoveNext()
-    {
-        canMove = true;
     }
 
     private void UpdateView()

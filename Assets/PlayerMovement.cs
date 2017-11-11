@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,12 +11,10 @@ public class PlayerMovement : MonoBehaviour
     Func<KeyCode, bool> KeyWasReleased = (KeyCode input) => Input.GetKeyUp(input);
     Func<KeyCode, bool> KeyWasPressed = (KeyCode input) => Input.GetKeyDown(input);
 
-    // Use this for initialization
     void Start()
     {
     }
 
-    // Update is called once per frame
     void Update()
     {
         hasMoved = CheckKeyUp(hasMoved);
@@ -27,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
             hasMoved = CheckKeyDown(hasMoved);
             UpdateView();
         }
+        CheckNodeInteraction();
     }
 
     private bool CheckKeyUp(bool moved)
@@ -77,6 +75,14 @@ public class PlayerMovement : MonoBehaviour
         if (currentNode != null)
         {
             transform.position = currentNode.transform.position;
+        }
+    }
+
+    private void CheckNodeInteraction()
+    {
+        if(Input.GetKey(KeyCode.Space))
+        {
+            levelManager.TryToInteractWithNode(currentNode);
         }
     }
 }
