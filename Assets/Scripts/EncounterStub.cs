@@ -3,10 +3,13 @@
 public class EncounterStub : MonoBehaviour, IEncounter
 {
     private const byte WAIT_PERIOD = 2;
-    private float timer = 0;
+    private const float TIMER_START_VALUE = 0.0f; 
+
+    private float timer = TIMER_START_VALUE;
     private bool timerIsRunning = false;
     private PlayerMovement thePlayer;
     private IceMovement ice;
+    private RectTransform actionIndicator;
 
     void Start()
     {
@@ -25,20 +28,22 @@ public class EncounterStub : MonoBehaviour, IEncounter
         {
             ice.Reset();
             thePlayer.GoOn();
-            timer = 0;
+            actionIndicator.gameObject.SetActive(false);
+            timer = TIMER_START_VALUE;
             timerIsRunning = false;
         }
     }
 
-    public void Fight(PlayerMovement player, RectTransform actionIndicator)
+    public void Fight(PlayerMovement player, RectTransform indicator)
     {
         if (!timerIsRunning)
         {
+            actionIndicator = indicator;
             actionIndicator.gameObject.SetActive(true);
             thePlayer = player;
             ice.Stay();
             player.Stay();
-            timer = 0;
+            timer = TIMER_START_VALUE;
             timerIsRunning = true;
         }
     }

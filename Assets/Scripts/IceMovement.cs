@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class IceMovement : MonoBehaviour
 {
-    const int numberOfDirections = 3;
+    const int NUMBER_OF_DIRECTIONS = 4;
+    const int ZERO = 0;
+    const float INTERVAL = 1.0f;
+    const string NAME_OF_MOVE_FUNC = "Move";
 
     public Node currentNode;
 
@@ -10,17 +14,17 @@ public class IceMovement : MonoBehaviour
     private IEncounter myEncounter;
     private Node startNode;
 
-    public IEncounter getEncounter
-    {
-        get { return myEncounter; }
-    }
-
     void Start()
     {
         startNode = currentNode;
-        InvokeRepeating("Move", 1.0f, 1.0f);
-        random = new System.Random((int)System.DateTime.Now.Ticks);
+        InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
+        random = new System.Random((int)DateTime.Now.Ticks);
         myEncounter = GetComponentInChildren<IEncounter>();
+    }
+
+    internal void Fight(PlayerMovement player, RectTransform actionIndicator)
+    {
+        myEncounter.Fight(player, actionIndicator);
     }
 
     // Update is called once per frame
@@ -31,12 +35,12 @@ public class IceMovement : MonoBehaviour
 
     public void Stay()
     {
-        CancelInvoke("Move");
+        CancelInvoke(NAME_OF_MOVE_FUNC);
     }
 
     public void Reset()
     {
-        InvokeRepeating("Move", 1.0f, 1.0f);
+        InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
         currentNode = startNode;
         UpdateView();
     }
@@ -47,7 +51,7 @@ public class IceMovement : MonoBehaviour
 
         while (currentNode == newNode)
         {
-            var newDirection = random.Next(0, numberOfDirections + 1);
+            var newDirection = random.Next(ZERO, NUMBER_OF_DIRECTIONS);
             newNode = currentNode.getNeighbour((Direction)newDirection);
         }
         currentNode = newNode;

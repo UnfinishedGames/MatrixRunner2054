@@ -3,29 +3,25 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    private const byte INTERACTION_SLIDER_INTERVAL = 40;
+    private const byte INTERACTION_SLIDER_START = 0;
+    private const byte INTERACTION_SLIDER_MAX = 100;
+
     public PlayerMovement player;
     public IceMovement ice;
     public Slider interactionTimeElapsed;
-    public Text attackAlert;
-    public EncounterStub currentEncounter;
     public RectTransform actionIndicator;
 
-    // Use this for initialization
     void Start()
     {
         actionIndicator.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (player.currentNode == ice.currentNode)
+        if (PlayerAndIceAreInTheSameNode())
         {
-            ice.getEncounter.Fight(player, actionIndicator);
-        }
-        else
-        {
-            actionIndicator.gameObject.SetActive(false);
+            ice.Fight(player, actionIndicator);
         }
     }
 
@@ -46,16 +42,21 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateInteractionSlider(Node currentNode)
     {
-        interactionTimeElapsed.value += (Time.deltaTime * 40);
-        if (interactionTimeElapsed.value >= 100)
+        interactionTimeElapsed.value += (Time.deltaTime * INTERACTION_SLIDER_INTERVAL);
+        if (interactionTimeElapsed.value >= INTERACTION_SLIDER_MAX)
         {
-            interactionTimeElapsed.value = 0;
+            interactionTimeElapsed.value = INTERACTION_SLIDER_START;
             currentNode.SwitchState(State.Hacked);
         }
     }
 
+    private bool PlayerAndIceAreInTheSameNode()
+    {
+        return player.currentNode == ice.currentNode;
+    }
+
     private void ResetInteractionSlider()
     {
-        interactionTimeElapsed.value = 0;
+        interactionTimeElapsed.value = INTERACTION_SLIDER_START;
     }
 }
