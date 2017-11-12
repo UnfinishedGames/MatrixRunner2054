@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour
-{
+[ExecuteInEditMode]
+public class Node : MonoBehaviour {
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
@@ -24,9 +24,12 @@ public class Node : MonoBehaviour
 
         mySprite = GetComponentInChildren<SpriteRenderer>();
     }
-    
+
     void Update()
     {
+        if (this.transform.hasChanged)
+        {
+        }
         UpdateView();
     }
 
@@ -49,19 +52,19 @@ public class Node : MonoBehaviour
     {
         return gameObj != null ? gameObj.GetComponent<Node>() : this;
     }
-    
+
     private void UpdateView()
     {
-        switch(currentState)
+        switch (currentState)
         {
-            case State.Initial:
-                mySprite.color = Color.white;
-                break;
-            case State.Hacked:
-                mySprite.color = Color.green;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException("currentState");
-         }
+        case State.Initial:
+            mySprite.color = Color.white;
+            break;
+        case State.Hacked:
+            mySprite.color = Color.green;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("currentState");
+        }
     }
 }

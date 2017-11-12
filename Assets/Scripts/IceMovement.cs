@@ -1,38 +1,43 @@
 ﻿using UnityEngine;
+using System.Runtime.ConstrainedExecution;
 
-public class IceMovement : MonoBehaviour
-{
+public class IceMovement : MonoBehaviour {
     const int numberOfDirections = 3;
-    
+
     public Node currentNode;
 
-    private bool canMove = false;
     private System.Random random;
-    
+    private IEncounter myEncounter;
+    private Node startNode;
+
     void Start()
     {
+        startNode = currentNode;
+        InvokeRepeating("Move", 1.0f, 1.0f); // Cancel by calling CancelInvoke("Move)
         random = new System.Random((int)System.DateTime.Now.Ticks);
+        myEncounter = GetComponentInChildren<IEncounter>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
-        {
-            Move();
-        }
+        
     }
-    
-    public void YouCanMoveNext()
-    {
-        canMove = true;
+
+    public IEncounter getEncounter {
+        get { return myEncounter; }
     }
 
     private void Move()
     {
-        var newDirection = random.Next(0, numberOfDirections + 1);
-        currentNode = currentNode.getNeighbour((Direction)newDirection);
-        canMove = false;
+        Node newNode = currentNode;
+
+        while (currentNode == newNode)
+        {
+            var newDirection = random.Next(0, numberOfDirections + 1);
+            newNode = currentNode.getNeighbour((Direction)newDirection);
+        }
+        currentNode = newNode;
         UpdateView();
     }
 
@@ -42,5 +47,17 @@ public class IceMovement : MonoBehaviour
         {
             transform.position = currentNode.transform.position;
         }
+    }
+
+    public void Stay()
+    {
+        CancelInvoke("Move");
+    }
+
+    public void Reset()
+    {
+        InvokeRepeating("Move", 1.0f, 1.0f);
+        currentNode = startNode;
+        UpdateView();
     }
 }

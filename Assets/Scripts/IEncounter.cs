@@ -1,9 +1,8 @@
 ﻿using System;
+using UnityEngine.UI;
 
-namespace AssemblyCSharp
+public interface IEncounter
 {
-    public interface IEncounter
-    {
-    }
+    void Fight(PlayerMovement player, IceMovement ice, Text text);
 }
 

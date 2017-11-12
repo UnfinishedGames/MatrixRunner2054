@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
-{
-    public PlayerMovement currentPlayer;
+public class LevelManager : MonoBehaviour {
+    public PlayerMovement player;
     public IceMovement ice;
     public Slider interactionTimeElapsed;
+    public Text attackAlert;
+    public EncounterStub currentEncounter;
 
     // Use this for initialization
     void Start()
@@ -15,12 +16,19 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (player.currentNode == ice.currentNode)
+        {
+            ice.getEncounter.Fight(player, ice, attackAlert);
+        }
+        else
+        {
+            attackAlert.text = "";
+        }
     }
 
     public Node TryToMovePlayer(Direction newDirection, Node currentNode)
     {
-        ice.YouCanMoveNext();
+        ResetInteractionSlider();
         return currentNode.getNeighbour(newDirection);
     }
 
@@ -41,5 +49,10 @@ public class LevelManager : MonoBehaviour
             interactionTimeElapsed.value = 0;
             currentNode.SwitchState(State.Hacked);
         }
+    }
+
+    private void ResetInteractionSlider()
+    {
+        interactionTimeElapsed.value = 0;
     }
 }

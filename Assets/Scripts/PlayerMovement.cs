@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     public Node currentNode;
     public LevelManager levelManager;
 
     private bool hasMoved = false;
+    private bool canMove = true;
 
     Func<KeyCode, bool> KeyWasReleased = (KeyCode input) => Input.GetKeyUp(input);
     Func<KeyCode, bool> KeyWasPressed = (KeyCode input) => Input.GetKeyDown(input);
@@ -15,8 +15,22 @@ public class PlayerMovement : MonoBehaviour
     {
     }
 
+    public void Stay()
+    {
+        canMove = false;
+    }
+
+    public void GoOn()
+    {
+        canMove = true;
+    }
+
     void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
         hasMoved = CheckKeyUp(hasMoved);
         if (!hasMoved)
         {
@@ -69,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             currentNode = levelManager.TryToMovePlayer(Direction.Down, currentNode);
         }
     }
-    
+
     private void UpdateView()
     {
         if (currentNode != null)
@@ -80,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckNodeInteraction()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             levelManager.TryToInteractWithNode(currentNode);
         }
