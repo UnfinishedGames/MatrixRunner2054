@@ -1,20 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SocialPlatforms;
-using System.Threading;
+﻿using UnityEngine;
 
-public class EncounterStub : MonoBehaviour, IEncounter {
-    // Use this for initialization
+public class EncounterStub : MonoBehaviour, IEncounter
+{
     private const byte WAIT_PERIOD = 2;
     private float timer = 0;
     private bool timerIsRunning = false;
-    PlayerMovement player;
-    IceMovement ice;
+    private PlayerMovement thePlayer;
+    private IceMovement ice;
 
     void Start()
     {
+        ice = GetComponentInParent<IceMovement>();
     }
 
     // Update is called once per frame
@@ -28,19 +24,18 @@ public class EncounterStub : MonoBehaviour, IEncounter {
         if (timer >= WAIT_PERIOD)
         {
             ice.Reset();
-            player.GoOn();
+            thePlayer.GoOn();
             timer = 0;
             timerIsRunning = false;
         }
     }
 
-    public void Fight(PlayerMovement player, IceMovement ice, Text text)
+    public void Fight(PlayerMovement player, RectTransform actionIndicator)
     {
         if (!timerIsRunning)
         {
-            this.ice = ice;
-            this.player = player;
-            text.text = "OMFG!";
+            actionIndicator.gameObject.SetActive(true);
+            thePlayer = player;
             ice.Stay();
             player.Stay();
             timer = 0;

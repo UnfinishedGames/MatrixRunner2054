@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Node : MonoBehaviour {
+public class Node : MonoBehaviour
+{
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
@@ -27,9 +28,6 @@ public class Node : MonoBehaviour {
 
     void Update()
     {
-        if (this.transform.hasChanged)
-        {
-        }
         UpdateView();
     }
 
@@ -57,14 +55,14 @@ public class Node : MonoBehaviour {
     {
         switch (currentState)
         {
-        case State.Initial:
-            mySprite.color = Color.white;
-            break;
-        case State.Hacked:
-            mySprite.color = Color.green;
-            break;
-        default:
-            throw new ArgumentOutOfRangeException("currentState");
+            case State.Initial:
+                mySprite.color = Color.white;
+                break;
+            case State.Hacked:
+                mySprite.color = Color.green;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("currentState");
         }
     }
 }

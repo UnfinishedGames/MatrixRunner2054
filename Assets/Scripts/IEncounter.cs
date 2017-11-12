@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public interface IEncounter
 {
-    void Fight(PlayerMovement player, IceMovement ice, Text text);
+    void Fight(PlayerMovement player, RectTransform actionIndicator);
 }
 

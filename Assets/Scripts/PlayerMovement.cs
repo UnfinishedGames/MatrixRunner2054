@@ -1,7 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
     public Node currentNode;
     public LevelManager levelManager;
 
@@ -14,17 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
     }
-
-    public void Stay()
-    {
-        canMove = false;
-    }
-
-    public void GoOn()
-    {
-        canMove = true;
-    }
-
+    
     void Update()
     {
         if (!canMove)
@@ -39,6 +30,16 @@ public class PlayerMovement : MonoBehaviour {
             UpdateView();
         }
         CheckNodeInteraction();
+    }
+
+    public void Stay()
+    {
+        canMove = false;
+    }
+
+    public void GoOn()
+    {
+        canMove = true;
     }
 
     private bool CheckKeyUp(bool moved)

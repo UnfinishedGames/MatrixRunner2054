@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
     public PlayerMovement player;
     public IceMovement ice;
     public Slider interactionTimeElapsed;
     public Text attackAlert;
     public EncounterStub currentEncounter;
+    public RectTransform actionIndicator;
 
     // Use this for initialization
     void Start()
     {
+        actionIndicator.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -18,11 +21,11 @@ public class LevelManager : MonoBehaviour {
     {
         if (player.currentNode == ice.currentNode)
         {
-            ice.getEncounter.Fight(player, ice, attackAlert);
+            ice.getEncounter.Fight(player, actionIndicator);
         }
         else
         {
-            attackAlert.text = "";
+            actionIndicator.gameObject.SetActive(false);
         }
     }
 
