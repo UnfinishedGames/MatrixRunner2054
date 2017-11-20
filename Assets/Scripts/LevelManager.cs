@@ -1,4 +1,4 @@
-﻿using System;
+﻿using MissionEngine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,21 +12,24 @@ public class LevelManager : MonoBehaviour
     public IceMovement ice;
     public Slider interactionTimeElapsed;
     public RectTransform actionIndicator;
+    public RectTransform gameOverIndicator;
     public MissionManager missionManager;
 
+    private Text gameOverText;
+    
     void Start()
     {
         actionIndicator.gameObject.SetActive(false);
+        gameOverIndicator.gameObject.SetActive(false);
+        gameOverText = gameOverIndicator.GetComponentInChildren<Text>();
+
     }
 
     void Update()
     {
         QuitOnEscape();
         CheckVictoryConditions();
-        if (PlayerAndIceAreInTheSameNode())
-        {
-            ice.Fight(player, actionIndicator);
-        }
+        CheckIfFightIsOn();
     }
 
     public Node TryToMovePlayer(Direction newDirection, Node currentNode)
@@ -49,6 +52,7 @@ public class LevelManager : MonoBehaviour
         interactionTimeElapsed.value += (Time.deltaTime * INTERACTION_SLIDER_INTERVAL);
         if (interactionTimeElapsed.value >= INTERACTION_SLIDER_MAX)
         {
+            missionManager.Inform(GameAction.NodeHacked);
             interactionTimeElapsed.value = INTERACTION_SLIDER_START;
             currentNode.SwitchState(State.Hacked);
         }
@@ -74,5 +78,28 @@ public class LevelManager : MonoBehaviour
 
     private void CheckVictoryConditions()
     {
+        var state = missionManager.CheckMissionState();
+        if(state == MissionState.InProgress)
+        {
+            return;
+        }
+        if (state == MissionState.Failed)
+        {
+            gameOverIndicator.gameObject.SetActive(true);
+            gameOverText.text = "You fail";
+        }
+        if (state == MissionState.Succeeded)
+        {
+            gameOverIndicator.gameObject.SetActive(true);
+            gameOverText.text = "You succeed";
+        }
+    }
+
+    private void CheckIfFightIsOn()
+    {
+        if (PlayerAndIceAreInTheSameNode())
+        {
+            ice.Fight(player, actionIndicator);
+        }
     }
 }

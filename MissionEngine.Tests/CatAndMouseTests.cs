@@ -49,6 +49,21 @@ namespace MissionEngine.Tests.cs
             result.Should().Be(MissionState.Succeeded);
         }
 
+        [TestMethod]
+        public void AskingForMissionState_AfterAReset_ResultsInMissionInProgress()
+        {
+            target.Inform(GameAction.NodeHacked);
+            target.Inform(GameAction.NodeHacked);
+            target.StartMission();
+            MissionState result = target.AskMissionState();
+            result.Should().Be(MissionState.InProgress);
+        }
 
+        [TestMethod]
+        public void AskingForMissionDescription_ResultsInMissionDescription()
+        {
+            string result = target.GetDescription();
+            result.Should().Be("Mission:\r\n Hack all nodes while being caught less than three times");
+        }
     }
 }

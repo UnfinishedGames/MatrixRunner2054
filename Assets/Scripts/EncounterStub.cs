@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MissionEngine;
+using UnityEngine;
 
 public class EncounterStub : MonoBehaviour, IEncounter
 {
@@ -10,10 +11,12 @@ public class EncounterStub : MonoBehaviour, IEncounter
     private PlayerMovement thePlayer;
     private IceMovement ice;
     private RectTransform actionIndicator;
+    private MissionManager missionManager;
 
     void Start()
     {
         ice = GetComponentInParent<IceMovement>();
+        missionManager = GameObject.Find("MissionManager").GetComponent<MissionManager>();
     }
 
     // Update is called once per frame
@@ -26,6 +29,7 @@ public class EncounterStub : MonoBehaviour, IEncounter
         timer += Time.deltaTime;
         if (timer >= WAIT_PERIOD)
         {
+            missionManager.Inform(GameAction.FightInProgress);
             ice.Reset();
             thePlayer.GoOn();
             actionIndicator.gameObject.SetActive(false);

@@ -1,4 +1,0 @@
-﻿internal enum GameAction
-{
-    FightInProgress
-}

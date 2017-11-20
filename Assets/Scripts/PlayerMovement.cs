@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class PlayerMovement : MonoBehaviour
     private bool hasMoved = false;
     private bool canMove = true;
     private PlayerKeyInteractions keyInteractions;
+    private Node startNode;
 
     void Start()
     {
+        startNode = currentNode;
         keyInteractions = new PlayerKeyInteractions(levelManager);
     }
     
@@ -38,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
     public void GoOn()
     {
         canMove = true;
+    }
+
+    public void SetToStart()
+    {
+        currentNode = startNode;
     }
 
     private void UpdateView()
