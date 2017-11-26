@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace MissionEngine
 {
-    public class CatAndMouseMission : Mission
-    {
+    public class CatAndMouseMission : Mission {
         private byte fightsAlreadyFought = 0;
         private byte nodesAlreadyHacked = 0;
         private int fightsUntilFail = 0;
@@ -13,7 +12,7 @@ namespace MissionEngine
 
         public override string GetDescription()
         {
-            return "Mission:\r\n Hack all nodes while being caught less than three times";
+            return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than three times";
         }
 
         public override void Parameterzie(Dictionary<string, int> dictionary)
@@ -28,19 +27,19 @@ namespace MissionEngine
             nodesAlreadyHacked = 0;
             currentState = MissionState.InProgress;
         }
-        
+
         public override void Inform(GameAction currentAction)
         {
             switch (currentAction)
             {
-                case GameAction.FightInProgress:
-                    fightsAlreadyFought++;
-                    break;
-                case GameAction.NodeHacked:
-                    nodesAlreadyHacked++;
-                    break;
-                default:
-                    throw new InvalidOperationException("currentAction");
+            case GameAction.FightInProgress:
+                fightsAlreadyFought++;
+                break;
+            case GameAction.NodeHacked:
+                nodesAlreadyHacked++;
+                break;
+            default:
+                throw new InvalidOperationException("currentAction");
             }
         }
 
