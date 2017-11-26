@@ -1,8 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     public Node currentNode;
     public LevelManager levelManager;
 
@@ -13,10 +12,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Starting Player");
         startNode = currentNode;
         keyInteractions = new PlayerKeyInteractions(levelManager);
     }
-    
+
     void Update()
     {
         if (!canMove)

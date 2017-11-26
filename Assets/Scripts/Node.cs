@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Node : MonoBehaviour
-{
+public class Node : NodePath {
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
     public GameObject downObject;
 
-    private Dictionary<Direction, Node> possibleDirections;
+    public Dictionary<Direction, Node> possibleDirections;
     private SpriteRenderer mySprite;
     private State currentState = State.Initial;
 
     void Start()
     {
-        possibleDirections = new Dictionary<Direction, Node>();
-
-        possibleDirections.Add(Direction.Left, NodeFromObjectOrMyself(leftObject));
-        possibleDirections.Add(Direction.Right, NodeFromObjectOrMyself(rightObject));
-        possibleDirections.Add(Direction.Up, NodeFromObjectOrMyself(upObject));
-        possibleDirections.Add(Direction.Down, NodeFromObjectOrMyself(downObject));
-
+        pathDrawn = false;
         mySprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
+        if (possibleDirections == null)
+        {
+            possibleDirections = new Dictionary<Direction, Node>();
+
+            possibleDirections.Add(Direction.Left, NodeFromObjectOrMyself(leftObject));
+            possibleDirections.Add(Direction.Right, NodeFromObjectOrMyself(rightObject));
+            possibleDirections.Add(Direction.Up, NodeFromObjectOrMyself(upObject));
+            possibleDirections.Add(Direction.Down, NodeFromObjectOrMyself(downObject));
+        }
         UpdateView();
+        PathUpdate(this);
     }
 
     public bool CanInteract()
@@ -55,14 +58,14 @@ public class Node : MonoBehaviour
     {
         switch (currentState)
         {
-            case State.Initial:
-                mySprite.color = Color.white;
-                break;
-            case State.Hacked:
-                mySprite.color = Color.green;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException("currentState");
+        case State.Initial:
+            mySprite.color = Color.white;
+            break;
+        case State.Hacked:
+            mySprite.color = Color.green;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("currentState");
         }
     }
 }
