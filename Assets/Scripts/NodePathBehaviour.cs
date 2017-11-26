@@ -2,44 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NodePath : MonoBehaviour {
+public class NodePathBehaviour : MonoBehaviour {
 
     public GameObject path;
 
     public bool pathDrawn { set; private get; }
 
+    /* Used to indicate the last position the path was drawn */
     private Vector3 lastPosition = new Vector3(0, 0, 0);
-    private List<GameObject> pathLine = new List<GameObject>();
+    private List<GameObject> lineRendererContainer = new List<GameObject>();
+
+    protected void InitializePathBehavoir()
+    {
+    }
 
     public void PathUpdate(Node myNode)
     {
-        if (!myNode)
+        if (myNode.transform.position != lastPosition)
         {
-            myNode = GetComponent<Node>();
-        }
-
-        if (myNode)
-        {
-            if (myNode.transform.position != lastPosition)
-            {
-                lastPosition = myNode.transform.position;
-                pathDrawn = false;
-            }
-            if (!pathDrawn)
-            {
-                DrawPath(myNode);
-            }
+            lastPosition = myNode.transform.position;
+            DrawPath(myNode);
         }
     }
 
     private void DrawPath(Node myNode)
     {
-        foreach (GameObject renderer in pathLine)
+        foreach (GameObject renderer in lineRendererContainer)
         {
-//            LineRenderer newLineRenderer = renderer.GetComponent<LineRenderer>().enabled = false;
             DestroyImmediate(renderer);
         }
-        pathLine.Clear();
+        lineRendererContainer.Clear();
 
         foreach (Node otherNode in myNode.possibleDirections.Values)
         {
@@ -48,11 +40,6 @@ public class NodePath : MonoBehaviour {
                 Vector3 opponentPosition = otherNode.transform.position;
                 Vector3 myPosition = transform.position;
                 drawLine(opponentPosition, myPosition);
-                NodePath otherNodePath = otherNode.GetComponentInParent<NodePath>();
-                if (otherNodePath)
-                {
-                    otherNodePath.pathDrawn = true;
-                }
             }
         }
         pathDrawn = true;
@@ -62,8 +49,8 @@ public class NodePath : MonoBehaviour {
     {
         GameObject newPath = Instantiate(path);
         LineRenderer newLineRenderer = newPath.GetComponent<LineRenderer>();
-        this.pathLine.Add(newPath);
-//        newPath.hideFlags = HideFlags.DontSaveInEditor;
+        this.lineRendererContainer.Add(newPath);
+//        newPath.hideFlags = HideFlags.HideInHierarchy;
         newLineRenderer.enabled = true;
         Vector3[] points = new Vector3[2]{ startPosition, endPosition };
         newLineRenderer.SetPositions(points);

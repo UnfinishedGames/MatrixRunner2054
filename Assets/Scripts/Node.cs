@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Node : NodePath {
+public class Node : MonoBehaviour {
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
     public GameObject downObject;
 
-    public Dictionary<Direction, Node> possibleDirections;
+    public Dictionary<Direction, Node> possibleDirections = null;
     private SpriteRenderer mySprite;
     private State currentState = State.Initial;
 
     void Start()
     {
-        pathDrawn = false;
         mySprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
+    {
+        InitializeForEditor();
+        UpdateView();
+    }
+
+    private void InitializeForEditor()
     {
         if (possibleDirections == null)
         {
@@ -30,8 +35,6 @@ public class Node : NodePath {
             possibleDirections.Add(Direction.Up, NodeFromObjectOrMyself(upObject));
             possibleDirections.Add(Direction.Down, NodeFromObjectOrMyself(downObject));
         }
-        UpdateView();
-        PathUpdate(this);
     }
 
     public bool CanInteract()
