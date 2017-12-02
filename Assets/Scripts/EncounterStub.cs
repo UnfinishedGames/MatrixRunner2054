@@ -1,10 +1,9 @@
 ﻿using MissionEngine;
 using UnityEngine;
 
-public class EncounterStub : MonoBehaviour, IEncounter
-{
+public class EncounterStub : MonoBehaviour, IEncounter {
     private const byte WAIT_PERIOD = 2;
-    private const float TIMER_START_VALUE = 0.0f; 
+    private const float TIMER_START_VALUE = 0.0f;
 
     private float timer = TIMER_START_VALUE;
     private bool timerIsRunning = false;
@@ -30,7 +29,8 @@ public class EncounterStub : MonoBehaviour, IEncounter
         if (timer >= WAIT_PERIOD)
         {
             missionManager.Inform(GameAction.FightInProgress);
-            ice.Reset();
+            Node iceStartNode = thePlayer.currentNode == ice.startNode ? thePlayer.startNode : ice.startNode;
+            ice.Reset(iceStartNode);
             thePlayer.GoOn();
             actionIndicator.gameObject.SetActive(false);
             timer = TIMER_START_VALUE;

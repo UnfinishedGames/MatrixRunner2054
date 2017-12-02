@@ -1,8 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class IceMovement : MonoBehaviour
-{
+public class IceMovement : MonoBehaviour {
     const int NUMBER_OF_DIRECTIONS = 4;
     const int ZERO = 0;
     const float INTERVAL = 1.0f;
@@ -12,7 +11,8 @@ public class IceMovement : MonoBehaviour
 
     private System.Random random;
     private IEncounter myEncounter;
-    private Node startNode;
+
+    public Node startNode { get; private set; }
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class IceMovement : MonoBehaviour
         CancelInvoke(NAME_OF_MOVE_FUNC);
     }
 
-    public void Reset()
+    public void Reset(Node startNode)
     {
         InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
         currentNode = startNode;

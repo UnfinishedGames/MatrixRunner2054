@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour {
     private bool hasMoved = false;
     private bool canMove = true;
     private PlayerKeyInteractions keyInteractions;
-    private Node startNode;
+
+    public Node startNode { get; private set; }
 
     void Start()
     {
