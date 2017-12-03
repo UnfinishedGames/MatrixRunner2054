@@ -87,7 +87,7 @@ public class NodePathsManager : MonoBehaviour {
         GameObject newPath = Instantiate(path);
         LineRenderer newLineRenderer = newPath.GetComponent<LineRenderer>();
         newLineRenderer.enabled = true;
-        newPath.hideFlags = HideFlags.HideInHierarchy | HideFlags.DontSave;
+        newPath.hideFlags = HideFlags.NotEditable | HideFlags.DontSave;
         Vector3[] points = new Vector3[2]{ startPosition, endPosition };
         newLineRenderer.SetPositions(points); 
     }
