@@ -1,7 +1,8 @@
 ﻿using MissionEngine;
 using UnityEngine;
 
-public class EncounterStub : MonoBehaviour, IEncounter {
+public class FightEncounter : MonoBehaviour, IEncounter
+{
     private const byte WAIT_PERIOD = 2;
     private const float TIMER_START_VALUE = 0.0f;
 
@@ -38,7 +39,7 @@ public class EncounterStub : MonoBehaviour, IEncounter {
         }
     }
 
-    public void Fight(PlayerMovement player, RectTransform indicator)
+    public void Interaction(PlayerMovement player, RectTransform indicator)
     {
         if (!timerIsRunning)
         {

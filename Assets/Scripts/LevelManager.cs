@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
 
     public PlayerMovement player;
     public IceMovement ice;
+    public IceLocation[] countermeasures;
     public Slider interactionTimeElapsed;
     public RectTransform actionIndicator;
     public RectTransform gameOverIndicator;
@@ -63,6 +64,11 @@ public class LevelManager : MonoBehaviour
         return player.currentNode == ice.currentNode;
     }
 
+    private bool PlayerAndIceAreInTheSameNode(PlayerMovement player, IceLocation ice)
+    {
+        return player.currentNode == ice.currentNode;
+    }
+
     private void ResetInteractionSlider()
     {
         interactionTimeElapsed.value = INTERACTION_SLIDER_START;
@@ -99,7 +105,15 @@ public class LevelManager : MonoBehaviour
     {
         if (PlayerAndIceAreInTheSameNode())
         {
-            ice.Fight(player, actionIndicator);
+            ice.Interact(player, actionIndicator);
+        }
+
+        foreach(IceLocation ice in countermeasures)
+        {
+            if (PlayerAndIceAreInTheSameNode(player, ice))
+            {
+                ice.Interact(player, actionIndicator);
+            }
         }
     }
 }
