@@ -63,7 +63,7 @@ namespace MissionEngine.Tests.cs
         public void AskingForMissionDescription_ResultsInMissionDescription()
         {
             string result = target.GetDescription();
-            result.Should().Be("Mission:\r\n Hack all nodes while being caught less than three times");
+            result.Should().Be("Mission:\r\n Hack 2 nodes while being caught less than three times");
         }
     }
 }

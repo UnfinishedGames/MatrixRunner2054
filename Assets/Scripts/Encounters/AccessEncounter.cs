@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AuthenticationEncounter : MonoBehaviour, IEncounter
+public class AccessEncounter : MonoBehaviour, IEncounter
 {
     private const byte WAIT_PERIOD = 2;
     private const float TIMER_START_VALUE = 0.0f;
@@ -11,7 +10,7 @@ public class AuthenticationEncounter : MonoBehaviour, IEncounter
     private PlayerMovement thePlayer;
     private RectTransform actionIndicator;
     private bool AlreadyFoughtOnce = false;
-
+    
     void Start()
     {
     }
