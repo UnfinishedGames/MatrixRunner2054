@@ -13,13 +13,14 @@ internal class PlayerKeyInteractions
         levelManager = manager;
     }
 
-    internal bool CheckKeyUp(bool moved)
+    internal bool CheckKeyUp(bool moved, ref bool done)
     {
         var keyUpHappened =
             KeyWasReleased(KeyCode.LeftArrow) ||
             KeyWasReleased(KeyCode.RightArrow) ||
             KeyWasReleased(KeyCode.UpArrow) ||
             KeyWasReleased(KeyCode.DownArrow);
+        done = keyUpHappened;
         return keyUpHappened ? false : moved;
     }
 

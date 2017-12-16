@@ -1,6 +1,13 @@
-﻿using MissionEngine;
+﻿using System.Linq;
+using MissionEngine;
 using UnityEngine;
 using UnityEngine.UI;
+
+enum GameState
+{
+    GAMESTATE_PLAYER_ACTION = 0,
+    GAMESTATE_ICE_ACTION,
+}
 
 public class LevelManager : MonoBehaviour
 {
@@ -17,6 +24,7 @@ public class LevelManager : MonoBehaviour
     public MissionManager missionManager;
 
     private Text gameOverText;
+    private GameState gameState;
     
     void Start()
     {
@@ -28,6 +36,7 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
+        CheckState();
         QuitOnEscape();
         CheckVictoryConditions();
         CheckIfFightIsOn();
@@ -115,5 +124,41 @@ public class LevelManager : MonoBehaviour
                 ice.Interact(player, actionIndicator);
             }
         }
+    }
+
+    private void CheckState()
+    {
+        switch (gameState)
+        {
+            case GameState.GAMESTATE_PLAYER_ACTION:
+            {
+                if (true == player.Action())
+                {
+                    gameState = GameState.GAMESTATE_ICE_ACTION;
+                }
+                break;
+            }
+            case GameState.GAMESTATE_ICE_ACTION:
+            {
+                if (AllICsHaveMoved())
+                {
+                    gameState = GameState.GAMESTATE_PLAYER_ACTION;
+                }
+                break;
+            }
+        }
+    }
+
+    private bool AllICsHaveMoved()
+    {
+        foreach (var iceMovement in countermeasures)
+        {
+            var movement = iceMovement as IceMovement;
+            if (movement != null)
+            {
+                movement.Move();
+            }
+        }
+        return true;
     }
 }

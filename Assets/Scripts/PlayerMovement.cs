@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour {
     private bool hasMoved = false;
     private bool canMove = true;
     private PlayerKeyInteractions keyInteractions;
+    private Node nextNode;
+    private float timeSinceLastMovement = 1.0f;
+    private float moveInterval = 1.0f; // The Intervall in which the player can move
 
     public Node startNode { get; private set; }
 
@@ -18,13 +21,14 @@ public class PlayerMovement : MonoBehaviour {
         keyInteractions = new PlayerKeyInteractions(levelManager);
     }
 
-    void Update()
+    public bool Action()
     {
+        bool done = false;
         if (!canMove)
         {
-            return;
+            return false;
         }
-        hasMoved = keyInteractions.CheckKeyUp(hasMoved);
+        hasMoved = keyInteractions.CheckKeyUp(hasMoved, ref done);
         if (!hasMoved)
         {
             currentNode = keyInteractions.SetNodeForArrowInput(currentNode);
@@ -32,6 +36,7 @@ public class PlayerMovement : MonoBehaviour {
             UpdateView();
         }
         keyInteractions.PerformSpaceKeyInteraction(currentNode);
+        return done;
     }
 
     public void Stay()

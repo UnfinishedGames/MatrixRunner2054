@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 public class IceMovement : IceLocation {
     const int NUMBER_OF_DIRECTIONS = 4;
@@ -12,7 +11,7 @@ public class IceMovement : IceLocation {
     void Start()
     {
         InitializeForStartup();
-        InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
+        //InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
         random = new System.Random((int)DateTime.Now.Ticks);
     }
 
@@ -24,17 +23,17 @@ public class IceMovement : IceLocation {
 
     public void Stay()
     {
-        CancelInvoke(NAME_OF_MOVE_FUNC);
+        //CancelInvoke(NAME_OF_MOVE_FUNC);
     }
 
     public void Reset(Node startNode)
     {
-        InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
+        //InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
         currentNode = startNode;
         UpdateView();
     }
 
-    private void Move()
+    public void Move()
     {
         Node newNode = currentNode;
 
