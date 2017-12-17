@@ -2,6 +2,6 @@
 
 public interface IEncounter
 {
-    void Interaction(PlayerMovement player, RectTransform actionIndicator);
+    void Interaction(PlayerMovement player);
 }
 

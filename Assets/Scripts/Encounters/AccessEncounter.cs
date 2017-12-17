@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 
-public class AccessEncounter : MonoBehaviour, IEncounter
+public class AccessEncounter : EncounterBase, IEncounter
 {
     private const byte WAIT_PERIOD = 2;
     private const float TIMER_START_VALUE = 0.0f;
 
     private float timer = TIMER_START_VALUE;
     private bool timerIsRunning = false;
-    private PlayerMovement thePlayer;
-    private RectTransform actionIndicator;
     private bool AlreadyFoughtOnce = false;
     
     void Start()
     {
+        Initialize();
     }
 
     // Update is called once per frame
@@ -33,12 +32,12 @@ public class AccessEncounter : MonoBehaviour, IEncounter
         }
     }
 
-    public void Interaction(PlayerMovement player, RectTransform indicator)
+    public void Interaction(PlayerMovement player)
     {
         if (!timerIsRunning && !AlreadyFoughtOnce)
         {
-            actionIndicator = indicator;
             actionIndicator.gameObject.SetActive(true);
+            actionIndicatorText.text = "authenticating";
             thePlayer = player;
             player.Stay();
             timer = TIMER_START_VALUE;

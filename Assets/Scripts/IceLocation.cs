@@ -11,9 +11,9 @@ public class IceLocation : MonoBehaviour
         InitializeForStartup();
     }
 
-    internal void Interact(PlayerMovement player, RectTransform actionIndicator)
+    internal void Interact(PlayerMovement player)
     {
-        myEncounter.Interaction(player, actionIndicator);
+        myEncounter.Interaction(player);
     }
 
     protected void InitializeForStartup()

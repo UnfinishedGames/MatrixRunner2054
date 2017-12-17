@@ -1,22 +1,20 @@
 ﻿using MissionEngine;
 using UnityEngine;
 
-public class FightEncounter : MonoBehaviour, IEncounter
+public class FightEncounter : EncounterBase, IEncounter
 {
     private const byte WAIT_PERIOD = 2;
     private const float TIMER_START_VALUE = 0.0f;
 
     private float timer = TIMER_START_VALUE;
     private bool timerIsRunning = false;
-    private PlayerMovement thePlayer;
-    private IceMovement ice;
-    private RectTransform actionIndicator;
-    private MissionManager missionManager;
 
+    private IceMovement ice;
+    
     void Start()
     {
         ice = GetComponentInParent<IceMovement>();
-        missionManager = GameObject.Find("MissionManager").GetComponent<MissionManager>();
+        Initialize();
     }
 
     // Update is called once per frame
@@ -39,12 +37,12 @@ public class FightEncounter : MonoBehaviour, IEncounter
         }
     }
 
-    public void Interaction(PlayerMovement player, RectTransform indicator)
+    public void Interaction(PlayerMovement player)
     {
         if (!timerIsRunning)
         {
-            actionIndicator = indicator;
             actionIndicator.gameObject.SetActive(true);
+            actionIndicatorText.text = "... fight ...";
             thePlayer = player;
             ice.Stay();
             player.Stay();

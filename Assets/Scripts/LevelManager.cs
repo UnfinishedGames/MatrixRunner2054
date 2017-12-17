@@ -114,14 +114,14 @@ public class LevelManager : MonoBehaviour
     {
         if (PlayerAndIceAreInTheSameNode())
         {
-            ice.Interact(player, actionIndicator);
+            ice.Interact(player);
         }
 
         foreach(IceLocation ice in countermeasures)
         {
             if (PlayerAndIceAreInTheSameNode(player, ice))
             {
-                ice.Interact(player, actionIndicator);
+                ice.Interact(player);
             }
         }
     }
