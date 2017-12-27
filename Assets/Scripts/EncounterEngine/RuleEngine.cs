@@ -9,7 +9,7 @@ public class RuleEngine
         diceRoller = new DiceRoller(DateTime.Today.Ticks);
     }
 
-    public Winner RollOff(PlayerCharacterSheet player, SystemComponentSheet ice, ExecuteUtility utility)
+    public Winner RollOff(CharacterSheet player, ComponentSheet ice, ExecuteUtility utility)
     {
         switch(utility)
         {
@@ -20,7 +20,7 @@ public class RuleEngine
         }
     }
 
-    private Winner PerformDeceptionCheck(PlayerCharacterSheet player, SystemComponentSheet ice)
+    private Winner PerformDeceptionCheck(CharacterSheet player, ComponentSheet ice)
     {
         var winner = Winner.Draw;
         var playerRoll = diceRoller.MakeSuccessTest(player.DeceptionProgram, ice.SystemRating);

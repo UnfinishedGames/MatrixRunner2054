@@ -8,13 +8,13 @@ public class FightEncounter : EncounterBase, IEncounter
 
     private float timer = TIMER_START_VALUE;
     private bool timerIsRunning = false;
+    private IceMovement theIce;
 
-    private IceMovement ice;
-    
+
     void Start()
     {
-        ice = GetComponentInParent<IceMovement>();
         Initialize();
+        theIce = GetComponentInParent<IceMovement>();
     }
 
     // Update is called once per frame
@@ -28,8 +28,8 @@ public class FightEncounter : EncounterBase, IEncounter
         if (timer >= WAIT_PERIOD)
         {
             missionManager.Inform(GameAction.FightInProgress);
-            Node iceStartNode = thePlayer.currentNode == ice.startNode ? thePlayer.startNode : ice.startNode;
-            ice.Reset(iceStartNode);
+            Node iceStartNode = thePlayer.currentNode == theIce.startNode ? thePlayer.startNode : theIce.startNode;
+            theIce.Reset(iceStartNode);
             thePlayer.GoOn();
             actionIndicator.gameObject.SetActive(false);
             timer = TIMER_START_VALUE;
@@ -44,7 +44,6 @@ public class FightEncounter : EncounterBase, IEncounter
             actionIndicator.gameObject.SetActive(true);
             actionIndicatorText.text = "... fight ...";
             thePlayer = player;
-            ice.Stay();
             player.Stay();
             timer = TIMER_START_VALUE;
             timerIsRunning = true;

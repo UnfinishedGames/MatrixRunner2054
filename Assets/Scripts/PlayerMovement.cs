@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
     public Node currentNode;
     public LevelManager levelManager;
+    public PlayerCharacterSheet characterSheet;
 
     private bool hasMoved = false;
     private bool canMove = true;

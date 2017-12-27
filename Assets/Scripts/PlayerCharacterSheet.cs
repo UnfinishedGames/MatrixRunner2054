@@ -1,5 +1,21 @@
-﻿public class PlayerCharacterSheet
+﻿using UnityEngine;
+
+public class PlayerCharacterSheet : MonoBehaviour
 {
-    public int DeceptionProgram { get; set; }
-    public int MaskingkAttribute { get; set; }
+    public int MaskingkAttribute;
+    public int DeceptionProgram;
+
+    private CharacterSheet characterSheet;
+    
+    public CharacterSheet Bundeled
+    {
+        get { return characterSheet; }
+    }
+
+	void Start ()
+    {
+        characterSheet = new CharacterSheet();
+        characterSheet.MaskingkAttribute = MaskingkAttribute;
+        characterSheet.DeceptionProgram = DeceptionProgram;       	
+	}
 }

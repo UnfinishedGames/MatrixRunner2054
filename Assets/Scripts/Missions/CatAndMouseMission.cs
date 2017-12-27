@@ -12,7 +12,7 @@ namespace MissionEngine
 
         public override string GetDescription()
         {
-            return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than three times";
+            return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than " + fightsUntilFail + " times";
         }
 
         public override void Parameterzie(Dictionary<string, int> dictionary)

@@ -11,24 +11,16 @@ public class IceMovement : IceLocation {
     void Start()
     {
         InitializeForStartup();
-        //InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
-        random = new System.Random((int)DateTime.Now.Ticks);
+        random = new Random((int)DateTime.Now.Ticks);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
-    public void Stay()
-    {
-        //CancelInvoke(NAME_OF_MOVE_FUNC);
-    }
-
     public void Reset(Node startNode)
     {
-        //InvokeRepeating(NAME_OF_MOVE_FUNC, INTERVAL, INTERVAL);
         currentNode = startNode;
         UpdateView();
     }

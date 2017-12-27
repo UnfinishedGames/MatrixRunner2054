@@ -3,9 +3,11 @@
 public class IceLocation : MonoBehaviour
 {
     public Node currentNode;
+    public SystemComponentSheet componentSheet;
+
     public Node startNode { get; private set; }
     private IEncounter myEncounter;
-
+    
     void Start()
     {
         InitializeForStartup();

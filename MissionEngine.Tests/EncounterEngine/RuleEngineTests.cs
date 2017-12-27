@@ -20,13 +20,13 @@ namespace MissionEngine.Tests.cs.EncounterEngine
         {
             var target = new RuleEngine();
 
-            var player = new PlayerCharacterSheet
+            var player = new CharacterSheet
             {
                 MaskingkAttribute = 2,
                 DeceptionProgram = 2
             };
 
-            var ice = new SystemComponentSheet
+            var ice = new ComponentSheet
             {
                 SecurityCode = 4,
                 SystemRating = 6,
@@ -41,13 +41,13 @@ namespace MissionEngine.Tests.cs.EncounterEngine
         {
             var target = new RuleEngine();
 
-            var player = new PlayerCharacterSheet
+            var player = new CharacterSheet
             {
                 MaskingkAttribute = 5,
                 DeceptionProgram = 7
             };
 
-            var ice = new SystemComponentSheet
+            var ice = new ComponentSheet
             {
                 SecurityCode = 2,
                 SystemRating = 3,
@@ -62,13 +62,13 @@ namespace MissionEngine.Tests.cs.EncounterEngine
         {
             var target = new RuleEngine();
 
-            var player = new PlayerCharacterSheet
+            var player = new CharacterSheet
             {
                 MaskingkAttribute = 2,
                 DeceptionProgram = 2
             };
 
-            var ice = new SystemComponentSheet
+            var ice = new ComponentSheet
             {
                 SecurityCode = 2,
                 SystemRating = 3,

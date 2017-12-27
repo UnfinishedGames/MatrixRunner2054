@@ -112,11 +112,6 @@ public class LevelManager : MonoBehaviour
 
     private void CheckIfFightIsOn()
     {
-        if (PlayerAndIceAreInTheSameNode())
-        {
-            ice.Interact(player);
-        }
-
         foreach(IceLocation ice in countermeasures)
         {
             if (PlayerAndIceAreInTheSameNode(player, ice))
