@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 
 namespace MissionEngine.Tests.cs.Encounters
@@ -9,12 +8,12 @@ namespace MissionEngine.Tests.cs.Encounters
     {
         private const int COMMON_SEED = 3;
 
-        DieRoller dieRoller;
+        DiceRoller dieRoller;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            dieRoller = new DieRoller(COMMON_SEED);
+            dieRoller = new DiceRoller(COMMON_SEED);
         }
 
         [TestMethod]
