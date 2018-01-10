@@ -1,39 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MissionEngine;
+using System;
 
-namespace MissionEngine
+public class CatAndMouseMission : Mission
 {
-    public class DeprecatedCaMMission : DeprecatedMission {
-        private byte fightsAlreadyFought = 0;
-        private byte nodesAlreadyHacked = 0;
-        private int fightsUntilFail = 0;
-        private int nodesToHack = 0;
-        private MissionState currentState = MissionState.InProgress;
-        private IceMovement theBlackIce;
+    private byte fightsAlreadyFought = 0;
+    private byte nodesAlreadyHacked = 0;
+    private MissionState currentState = MissionState.InProgress;
 
-        public override string GetDescription()
-        {
-            return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than " + fightsUntilFail + " times";
-        }
+    public int FightsUntilFail = 0;
+    public int NodesToHack = 0;
+    public IceMovement BlackIceToActivate;
 
-        public override void Parameterzie(Dictionary<string, object> dictionary)
-        {
-            fightsUntilFail = (int)dictionary[Parameters.NumberOfFightsToLose];
-            nodesToHack = (int)dictionary[Parameters.NumberOfNodesToHack];
-            theBlackIce = (IceMovement)dictionary[Parameters.IceToActivate];
-        }
+    public override string GetDescription()
+    {
+        return "Mission:\r\n Hack " + NodesToHack + " nodes while being caught less than " + FightsUntilFail + " times";
+    }
 
-        public override void StartMission()
-        {
-            fightsAlreadyFought = 0;
-            nodesAlreadyHacked = 0;
-            currentState = MissionState.InProgress;
-        }
+    public override void StartMission()
+    {
+        fightsAlreadyFought = 0;
+        nodesAlreadyHacked = 0;
+        currentState = MissionState.InProgress;
+    }
 
-        public override void Inform(GameAction currentAction)
+    public override void Inform(GameAction currentAction)
+    {
+        switch (currentAction)
         {
-            switch (currentAction)
-            {
             case GameAction.FightInProgress:
                 fightsAlreadyFought++;
                 break;
@@ -45,26 +38,25 @@ namespace MissionEngine
                 break;
             default:
                 throw new InvalidOperationException("currentAction");
-            }
+        }
+    }
+
+    public override MissionState AskMissionState()
+    {
+        if (fightsAlreadyFought == FightsUntilFail)
+        {
+            currentState = MissionState.Failed;
+        }
+        if (nodesAlreadyHacked == NodesToHack)
+        {
+            currentState = MissionState.Succeeded;
         }
 
-        public override MissionState AskMissionState()
-        {
-            if (fightsAlreadyFought == fightsUntilFail)
-            {
-                currentState = MissionState.Failed;
-            }
-            if (nodesAlreadyHacked == nodesToHack)
-            {
-                currentState = MissionState.Succeeded;
-            }
+        return currentState;
+    }
 
-            return currentState;
-        }
-        
-        private void SendTheBlackIce()
-        {
-            throw new NotImplementedException();
-        }
+    private void SendTheBlackIce()
+    {
+        BlackIceToActivate.GoOn();
     }
 }
