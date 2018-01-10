@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MissionEngine
 {
-    public abstract class Mission
+    public abstract class DeprecatedMission
     {
         public virtual MissionState AskMissionState()
         {
@@ -18,7 +18,7 @@ namespace MissionEngine
         {
             throw new InvalidOperationException("Do not use me!");
         }
-        public virtual void Parameterzie(Dictionary<string, int> dictionary)
+        public virtual void Parameterzie(Dictionary<string, object> dictionary)
         {
             throw new InvalidOperationException("Do not use me!");
         }

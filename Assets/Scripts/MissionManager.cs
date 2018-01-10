@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour
 {
-    private Mission currentMission;
     private Text missionText;
     private RuleEngine ruleEngine;
 
     public RectTransform MissionIndicator;
-    
+    public CatAndMouseMission CurrentMission;
+
     public RuleEngine RuleEngine
     {
         get { return ruleEngine; }
@@ -20,11 +20,8 @@ public class MissionManager : MonoBehaviour
     {
         ruleEngine = new RuleEngine();
 
-        currentMission = MissionEngineStrategy.Create(MissionType.CatAndMouse);
-        currentMission.Parameterzie(new Dictionary<string, int> { { Parameters.NumberOfFightsToLose, 2 },
-                                                                  { Parameters.NumberOfNodesToHack, 9 } });
         missionText = MissionIndicator.GetComponentInChildren<Text>();
-        missionText.text = currentMission.GetDescription();
+        missionText.text = CurrentMission.GetDescription();
     }
 
     void Update()
@@ -34,16 +31,16 @@ public class MissionManager : MonoBehaviour
 
     internal void Inform(GameAction action)
     {
-        currentMission.Inform(action);
+        CurrentMission.Inform(action);
     }
 
     internal MissionState CheckMissionState()
     {
-        return currentMission.AskMissionState();
+        return CurrentMission.AskMissionState();
     }
 
     internal void RestartMission()
     {
-        currentMission.StartMission();
+        CurrentMission.StartMission();
     }
 }

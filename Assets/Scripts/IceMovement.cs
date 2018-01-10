@@ -7,6 +7,7 @@ public class IceMovement : IceLocation {
     const string NAME_OF_MOVE_FUNC = "Move";
 
     private System.Random random;
+    private bool canMove;
 
     void Start()
     {
@@ -19,6 +20,11 @@ public class IceMovement : IceLocation {
 
     }
 
+    public void GoOn()
+    {
+        canMove = true;
+    }
+
     public void Reset(Node startNode)
     {
         currentNode = startNode;
@@ -27,6 +33,11 @@ public class IceMovement : IceLocation {
 
     public void Move()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         Node newNode = currentNode;
 
         while (currentNode == newNode)

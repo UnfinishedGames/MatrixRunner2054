@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MissionEngine;
+using UnityEngine;
 
 public class AccessEncounter : EncounterBase, IEncounter
 {
@@ -82,6 +83,7 @@ public class AccessEncounter : EncounterBase, IEncounter
 
     private void EndEncounterInFailureState()
     {
+        missionManager.Inform(GameAction.AuthenticationFailed);
         thePlayer.GoOn();
         actionIndicator.gameObject.SetActive(false);
         timerIsRunning = false;

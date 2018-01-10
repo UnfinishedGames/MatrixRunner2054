@@ -16,7 +16,6 @@ public class LevelManager : MonoBehaviour
     private const byte INTERACTION_SLIDER_MAX = 100;
 
     public PlayerMovement player;
-    public IceMovement ice;
     public IceLocation[] countermeasures;
     public Slider interactionTimeElapsed;
     public RectTransform actionIndicator;
@@ -66,11 +65,6 @@ public class LevelManager : MonoBehaviour
             interactionTimeElapsed.value = INTERACTION_SLIDER_START;
             currentNode.SwitchState(State.Hacked);
         }
-    }
-
-    private bool PlayerAndIceAreInTheSameNode()
-    {
-        return player.currentNode == ice.currentNode;
     }
 
     private bool PlayerAndIceAreInTheSameNode(PlayerMovement player, IceLocation ice)

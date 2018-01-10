@@ -3,6 +3,7 @@
     public enum GameAction
     {
         FightInProgress,
-        NodeHacked
+        NodeHacked,
+        AuthenticationFailed
     }
 }

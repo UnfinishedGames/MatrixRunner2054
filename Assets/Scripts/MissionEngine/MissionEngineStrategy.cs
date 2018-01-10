@@ -2,14 +2,14 @@
 
 namespace MissionEngine
 {
-    public class MissionEngineStrategy
+    public class DeprecatedMissionStrategy
     {
-        public static Mission Create(MissionType mission)
+        public static DeprecatedCaMMission Create(MissionType mission)
         {
             switch (mission)
             {
                 case MissionType.CatAndMouse:
-                    return new CatAndMouseMission();
+                    return new DeprecatedCaMMission();
                 default:
                     throw new ArgumentOutOfRangeException("mission");
             }
