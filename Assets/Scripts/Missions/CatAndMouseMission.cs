@@ -3,60 +3,41 @@ using System;
 
 public class CatAndMouseMission : Mission
 {
-    private byte fightsAlreadyFought = 0;
-    private byte nodesAlreadyHacked = 0;
-    private MissionState currentState = MissionState.InProgress;
+    private CatAndMouseImplementation implementation;
 
     public int FightsUntilFail = 0;
     public int NodesToHack = 0;
     public IceMovement BlackIceToActivate;
 
+    public CatAndMouseMission()
+    {
+        implementation = new CatAndMouseImplementation();
+    }
+
+    private void Start()
+    {
+        implementation.FightsUntilFail = FightsUntilFail;
+        implementation.NodesToHack = NodesToHack;
+        implementation.BlackIceToActivate = BlackIceToActivate;
+    }
+
     public override string GetDescription()
     {
-        return "Mission:\r\n Hack " + NodesToHack + " nodes while being caught less than " + FightsUntilFail + " times";
+        return implementation.GetDescription();
     }
 
     public override void StartMission()
     {
-        fightsAlreadyFought = 0;
-        nodesAlreadyHacked = 0;
-        currentState = MissionState.InProgress;
+        implementation.StartMission();
     }
 
     public override void Inform(GameAction currentAction)
     {
-        switch (currentAction)
-        {
-            case GameAction.FightInProgress:
-                fightsAlreadyFought++;
-                break;
-            case GameAction.NodeHacked:
-                nodesAlreadyHacked++;
-                break;
-            case GameAction.AuthenticationFailed:
-                SendTheBlackIce();
-                break;
-            default:
-                throw new InvalidOperationException("currentAction");
-        }
+        implementation.Inform(currentAction);
     }
 
     public override MissionState AskMissionState()
     {
-        if (fightsAlreadyFought == FightsUntilFail)
-        {
-            currentState = MissionState.Failed;
-        }
-        if (nodesAlreadyHacked == NodesToHack)
-        {
-            currentState = MissionState.Succeeded;
-        }
-
-        return currentState;
-    }
-
-    private void SendTheBlackIce()
-    {
-        BlackIceToActivate.GoOn();
+        return implementation.AskMissionState();
     }
 }

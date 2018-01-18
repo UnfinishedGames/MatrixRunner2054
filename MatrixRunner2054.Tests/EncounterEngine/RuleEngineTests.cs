@@ -56,26 +56,5 @@ namespace MissionEngine.Tests.cs.EncounterEngine
 
             target.RollOff(player, ice, ExecuteUtility.Deception).Should().Be(Winner.CombatantOne);
         }
-
-        [TestMethod]
-        public void BeginnerPlayer_against_LowLevelIce_drawOn_DeceptionUtility()
-        {
-            var target = new RuleEngine();
-
-            var player = new CharacterSheet
-            {
-                MaskingkAttribute = 2,
-                DeceptionProgram = 2
-            };
-
-            var ice = new ComponentSheet
-            {
-                SecurityCode = 2,
-                SystemRating = 3,
-                IceRating = 4
-            };
-
-            target.RollOff(player, ice, ExecuteUtility.Deception).Should().Be(Winner.Draw);
-        }
     }
 }

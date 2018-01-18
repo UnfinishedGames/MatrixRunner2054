@@ -1,20 +1,21 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace MissionEngine.Tests.cs
 {
     [TestClass]
     public class CatAndMouseTests
     {
-        Mission target;
+        CatAndMouseImplementation target;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            target = MissionEngineStrategy.Create(MissionType.CatAndMouse);
-            target.Parameterzie(new Dictionary<string, int> { { Parameters.NumberOfFightsToLose, 3 },
-                                                              { Parameters.NumberOfNodesToHack, 2 } });
+            target = new CatAndMouseImplementation();
+            target.NodesToHack = 2;
+            target.FightsUntilFail = 3;
         }
 
         [TestMethod]

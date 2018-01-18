@@ -1,5 +1,6 @@
 ﻿using MissionEngine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FightEncounter : EncounterBase, IEncounter
 {
@@ -34,6 +35,7 @@ public class FightEncounter : EncounterBase, IEncounter
             actionIndicator.gameObject.SetActive(false);
             timer = TIMER_START_VALUE;
             timerIsRunning = false;
+            SceneManager.UnloadSceneAsync("BlackIceFight");
         }
     }
 
@@ -47,6 +49,7 @@ public class FightEncounter : EncounterBase, IEncounter
             player.Stay();
             timer = TIMER_START_VALUE;
             timerIsRunning = true;
+            SceneManager.LoadScene("BlackIceFight", LoadSceneMode.Additive);
         }
     }
 }
