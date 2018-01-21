@@ -6,37 +6,35 @@ public class PlayerMovement : MonoBehaviour
     public LevelManager levelManager;
     public PlayerCharacterSheet characterSheet;
 
-    private bool hasMoved = false;
     private bool canMove = true;
     private PlayerKeyInteractions keyInteractions;
     private Node nextNode;
-    private float timeSinceLastMovement = 1.0f;
-    private float moveInterval = 1.0f; // The Intervall in which the player can move
 
     public Node startNode { get; private set; }
+
 
     void Start()
     {
         Debug.Log("Starting Player");
         startNode = currentNode;
+        SetToStart();
         keyInteractions = new PlayerKeyInteractions(levelManager);
     }
 
     public bool Action()
     {
-        bool done = false;
-        if (!canMove)
+        var done = false;
+        if (canMove)
         {
-            return false;
+            var releasedKey = keyInteractions.CheckKeyUp();
+            if (releasedKey != KeyCode.None)
+            {
+                currentNode = keyInteractions.SetNodeForArrowInput(currentNode, releasedKey);
+                UpdateView();
+                done = true;
+            }
+            keyInteractions.PerformSpaceKeyInteraction(currentNode); // TODO: auf done setzen, wenn Node gehackt
         }
-        hasMoved = keyInteractions.CheckKeyUp(hasMoved, ref done);
-        if (!hasMoved)
-        {
-            currentNode = keyInteractions.SetNodeForArrowInput(currentNode);
-            hasMoved = keyInteractions.CheckKeyDown(hasMoved);
-            UpdateView();
-        }
-        keyInteractions.PerformSpaceKeyInteraction(currentNode);
         return done;
     }
 
@@ -53,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetToStart()
     {
         currentNode = startNode;
+        UpdateView();
     }
 
     private void UpdateView()

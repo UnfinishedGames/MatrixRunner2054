@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 internal class PlayerKeyInteractions
@@ -6,56 +7,62 @@ internal class PlayerKeyInteractions
     private LevelManager levelManager;
 
     Func<KeyCode, bool> KeyWasReleased = (KeyCode input) => Input.GetKeyUp(input);
-    Func<KeyCode, bool> KeyWasPressed = (KeyCode input) => Input.GetKeyDown(input);
     
     public PlayerKeyInteractions(LevelManager manager)
     {
         levelManager = manager;
     }
 
-    internal bool CheckKeyUp(bool moved, ref bool done)
+    internal KeyCode CheckKeyUp()
     {
-        var keyUpHappened =
-            KeyWasReleased(KeyCode.LeftArrow) ||
-            KeyWasReleased(KeyCode.RightArrow) ||
-            KeyWasReleased(KeyCode.UpArrow) ||
-            KeyWasReleased(KeyCode.DownArrow);
-        done = keyUpHappened;
-        return keyUpHappened ? false : moved;
-    }
-
-    internal bool CheckKeyDown(bool moved)
-    {
-        var keyDownHappened =
-            KeyWasPressed(KeyCode.LeftArrow) ||
-            KeyWasPressed(KeyCode.RightArrow) ||
-            KeyWasPressed(KeyCode.UpArrow) ||
-            KeyWasPressed(KeyCode.DownArrow);
-        return keyDownHappened ? true : moved;
+        var releasedKey = KeyCode.None;
+        var keyList = new List<KeyCode>();
+        keyList.Add(KeyCode.LeftArrow);
+        keyList.Add(KeyCode.RightArrow);
+        keyList.Add(KeyCode.UpArrow);
+        keyList.Add(KeyCode.DownArrow);
+        foreach(var keyCode in keyList)
+        {
+            if (KeyWasReleased(keyCode))
+            {
+                releasedKey = keyCode;
+                break;
+            }
+        }
+        return releasedKey;
     }
     
-    internal Node SetNodeForArrowInput(Node sourceNode)
+    internal Node SetNodeForArrowInput(Node sourceNode, KeyCode keyCode)
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        Direction direction;
+        switch (keyCode)
         {
-            return levelManager.TryToMovePlayer(Direction.Left, sourceNode);
+            case KeyCode.LeftArrow:
+            {
+                direction = Direction.Left;
+                break;
+            }
+            case KeyCode.RightArrow:
+            {
+                direction = Direction.Right;
+                break;
+            }
+            case KeyCode.UpArrow:
+            {
+                direction = Direction.Up;
+                break;
+            }
+            case KeyCode.DownArrow:
+            {
+                direction = Direction.Down;
+                break;
+            }
+            default:
+            {
+                return sourceNode;
+            }
         }
-
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            return levelManager.TryToMovePlayer(Direction.Right, sourceNode);
-        }
-
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            return levelManager.TryToMovePlayer(Direction.Up, sourceNode);
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            return levelManager.TryToMovePlayer(Direction.Down, sourceNode);
-        }
-        return sourceNode;
+        return levelManager.TryToMovePlayer(direction, sourceNode);
     }
 
     internal void PerformSpaceKeyInteraction(Node currentNode)
