@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Node : MonoBehaviour {
+public class Node : MonoBehaviour
+{
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
@@ -12,6 +13,7 @@ public class Node : MonoBehaviour {
     public Dictionary<Direction, Node> possibleDirections = null;
     private SpriteRenderer mySprite;
     private State currentState = State.Initial;
+    private IEncounter myEncounter = null;
 
     void Start()
     {
@@ -52,6 +54,35 @@ public class Node : MonoBehaviour {
         return possibleDirections[direction];
     }
 
+    public void Interact(PlayerMovement player)
+    {
+        if (this.myEncounter == null)
+        {
+            this.myEncounter = GetComponentInChildren<IEncounter>();
+            if (this.myEncounter != null)
+            {
+                myEncounter.Interaction(player);
+            }
+        }
+        else
+        {
+            if (myEncounter.Status() == EncounterStatus.PlayerLost)
+            {
+                this.currentState = State.Initial;
+                this.myEncounter = null;
+            }
+            else if (myEncounter.Status() == EncounterStatus.PlayerWins)
+            {
+                this.currentState = State.Hacked;
+                this.myEncounter = null;
+            }
+            else
+            {
+                // Nothing
+            }
+        }
+    }
+
     private Node NodeFromObjectOrMyself(GameObject gameObj)
     {
         return gameObj != null ? gameObj.GetComponent<Node>() : this;
@@ -61,14 +92,14 @@ public class Node : MonoBehaviour {
     {
         switch (currentState)
         {
-        case State.Initial:
-            mySprite.color = Color.white;
-            break;
-        case State.Hacked:
-            mySprite.color = Color.green;
-            break;
-        default:
-            throw new ArgumentOutOfRangeException("currentState");
+            case State.Initial:
+                mySprite.color = Color.white;
+                break;
+            case State.Hacked:
+                mySprite.color = Color.green;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("currentState");
         }
     }
 }

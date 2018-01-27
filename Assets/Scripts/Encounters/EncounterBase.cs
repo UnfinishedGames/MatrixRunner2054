@@ -14,4 +14,10 @@ public class EncounterBase : MonoBehaviour
         actionIndicator = GameObject.Find("/HUDCanvas/ActionIndicator").GetComponent<RectTransform>();
         actionIndicatorText = GameObject.Find("/HUDCanvas/ActionIndicator/ActionText").GetComponent<Text>();
     }
+
+    public EncounterStatus Status()
+    {
+        return EncounterStatus.Unavailable;
+    }
+
 }

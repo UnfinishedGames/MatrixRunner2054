@@ -53,7 +53,8 @@ public class LevelManager : MonoBehaviour
         {
             return;
         }
-        UpdateInteractionSlider(currentNode);
+        currentNode.Interact(player);
+        //UpdateInteractionSlider(currentNode);
     }
 
     private void UpdateInteractionSlider(Node currentNode)
