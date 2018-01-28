@@ -2,41 +2,56 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HackingEncounter : EncounterBase, IEncounter
-{
+public class HackingEncounter : EncounterBase, IEncounter {
     private EncounterStatus status = EncounterStatus.Unavailable;
     private Scene encounterScene;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-        if (status == EncounterStatus.OnGoing) {
+        if (status == EncounterStatus.OnGoing)
+        {
             //thePlayer.GoOn();
         }
     }
 
-    public new EncounterStatus Status ()
+    public new EncounterStatus Status()
     {
-        return status;
+        EncounterStatus result = EncounterStatus.Unavailable;
+        GameObject[] rootGameObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (GameObject gameObject in rootGameObjects)
+        {
+            if (gameObject.name == "PersistentEncounterStatus")
+            {
+                PersistentEncounterStatus status = gameObject.GetComponent<PersistentEncounterStatus>();
+                if (status != null)
+                {
+                    result = status.status;
+                }
+                break;
+            }
+        }
+        return result;
     }
 
-    public void Interaction (PlayerMovement player)
+    public void Interaction(PlayerMovement player)
     {
-        if (status == EncounterStatus.Unavailable) {
+        if (status == EncounterStatus.Unavailable)
+        {
             status = EncounterStatus.OnGoing;
             string hackingSceneName = "HackingHangman"; // TODO: make parameter for Interaction - load parameter from Editor
             //actionIndicator.gameObject.SetActive(true);
             //actionIndicatorText.text = "... fight ...";
             thePlayer = player;
-            thePlayer.Stay ();
-            SceneManager.LoadScene (hackingSceneName, LoadSceneMode.Additive);
-            encounterScene = SceneManager.GetSceneByName (hackingSceneName);
-            Debug.Log ("Hi");
+            thePlayer.Stay();
+            SceneManager.LoadScene(hackingSceneName, LoadSceneMode.Additive);
+            encounterScene = SceneManager.GetSceneByName(hackingSceneName);
+            Debug.Log("Hi");
             //SceneManager.MoveGameObjectToScene(EncounterTransferObject, hackingScene);
         }
     }

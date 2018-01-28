@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PersistentEncounterStatus : MonoBehaviour
-{
+public class PersistentEncounterStatus : MonoBehaviour {
     public PlayerMovement player;
     public EncounterStatus status = EncounterStatus.Unavailable;
 
-    void Awake ()
+    void Awake()
     {
-        DontDestroyOnLoad (transform.gameObject);
+        //DontDestroyOnLoad(transform.gameObject);
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
 
     }
  
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
 
     }
