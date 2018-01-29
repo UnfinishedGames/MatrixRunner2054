@@ -4,12 +4,10 @@ using UnityEngine.UI;
 
 public class DataStoreContents : MonoBehaviour
 {
-    public int NewYen;
+    public SpecificContents Contents;
 
     internal void Interact(PlayerCharacterSheet player, Text moneyIndicatorText)
     {
-        player.Money += NewYen;
-        player.UpdateCharacterSheet();
-        moneyIndicatorText.text = player.Money + " ¥";
+        Contents.Interact(player, moneyIndicatorText);
     }
 }

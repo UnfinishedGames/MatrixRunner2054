@@ -11,8 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Node nextNode;
 
     public Node startNode { get; private set; }
-
-
+    
     void Start()
     {
         Debug.Log("Starting Player");
