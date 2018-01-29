@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class Node : MonoBehaviour {
@@ -11,11 +12,13 @@ public class Node : MonoBehaviour {
 
     public Dictionary<Direction, Node> possibleDirections = null;
     private SpriteRenderer mySprite;
+    private DataStoreContents myContents;
     private State currentState = State.Initial;
 
     void Start()
     {
         mySprite = GetComponentInChildren<SpriteRenderer>();
+        myContents = GetComponentInChildren<DataStoreContents>();
     }
 
     void Update()
@@ -69,6 +72,14 @@ public class Node : MonoBehaviour {
             break;
         default:
             throw new ArgumentOutOfRangeException("currentState");
+        }
+    }
+
+    internal void InteractWithPlayer(PlayerCharacterSheet playerCharacterSheet, Text moneyIndicatorText)
+    {
+        if (myContents != null)
+        {
+            myContents.Interact(playerCharacterSheet, moneyIndicatorText);
         }
     }
 }

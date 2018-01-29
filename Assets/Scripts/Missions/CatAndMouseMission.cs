@@ -16,13 +16,13 @@ public class CatAndMouseMission : Mission
 
     private void Start()
     {
-        implementation.FightsUntilFail = FightsUntilFail;
-        implementation.NodesToHack = NodesToHack;
         implementation.BlackIceToActivate = BlackIceToActivate;
     }
 
     public override string GetDescription()
     {
+        implementation.FightsUntilFail = FightsUntilFail;
+        implementation.NodesToHack = NodesToHack;
         return implementation.GetDescription();
     }
 

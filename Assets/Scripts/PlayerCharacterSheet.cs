@@ -4,6 +4,7 @@ public class PlayerCharacterSheet : MonoBehaviour
 {
     public int MaskingkAttribute;
     public int DeceptionProgram;
+    public int Money;
 
     private CharacterSheet characterSheet;
     
@@ -12,10 +13,16 @@ public class PlayerCharacterSheet : MonoBehaviour
         get { return characterSheet; }
     }
 
-	void Start ()
+    void Start ()
     {
         characterSheet = new CharacterSheet();
-        characterSheet.MaskingkAttribute = MaskingkAttribute;
-        characterSheet.DeceptionProgram = DeceptionProgram;       	
+        UpdateCharacterSheet();
 	}
+
+    public void UpdateCharacterSheet()
+    {
+        characterSheet.MaskingkAttribute = MaskingkAttribute;
+        characterSheet.DeceptionProgram = DeceptionProgram;
+        characterSheet.Money = Money;
+    }
 }

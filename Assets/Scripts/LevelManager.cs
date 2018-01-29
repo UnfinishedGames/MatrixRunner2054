@@ -21,16 +21,20 @@ public class LevelManager : MonoBehaviour
     public RectTransform actionIndicator;
     public RectTransform gameOverIndicator;
     public MissionManager missionManager;
+    public RectTransform moneyIndicator;
 
     private Text gameOverText;
+    private Text moneyIndicatorText;
     private GameState gameState;
-    
+    private PlayerCharacterSheet playerCharacterSheet;
+
     void Start()
     {
         actionIndicator.gameObject.SetActive(false);
         gameOverIndicator.gameObject.SetActive(false);
         gameOverText = gameOverIndicator.GetComponentInChildren<Text>();
-
+        playerCharacterSheet = player.GetComponentInChildren<PlayerCharacterSheet>();
+        moneyIndicatorText = moneyIndicator.GetComponentInChildren<Text>();
     }
 
     void Update()
@@ -64,6 +68,7 @@ public class LevelManager : MonoBehaviour
             missionManager.Inform(GameAction.NodeHacked);
             interactionTimeElapsed.value = INTERACTION_SLIDER_START;
             currentNode.SwitchState(State.Hacked);
+            currentNode.InteractWithPlayer(playerCharacterSheet, moneyIndicatorText);
         }
     }
 
