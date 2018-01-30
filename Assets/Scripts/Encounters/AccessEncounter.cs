@@ -83,7 +83,7 @@ public class AccessEncounter : EncounterBase, IEncounter
 
     private void EndEncounterInFailureState()
     {
-        missionManager.Inform(GameAction.AuthenticationFailed);
+        missionManager.Inform(GameAction.AuthenticationFailed, null);
         thePlayer.GoOn();
         actionIndicator.gameObject.SetActive(false);
         timerIsRunning = false;

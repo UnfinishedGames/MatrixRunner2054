@@ -16,7 +16,7 @@ public class Mission : MonoBehaviour
         throw new InvalidOperationException("Do not use me!");
     }
 
-    public virtual void Inform(GameAction fightInProgress)
+    public virtual void Inform(GameAction fightInProgress, Dictionary<Type, object> data)
     {
         throw new InvalidOperationException("Do not use me!");
     }

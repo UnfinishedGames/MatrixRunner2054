@@ -28,7 +28,7 @@ public class FightEncounter : EncounterBase, IEncounter
         timer += Time.deltaTime;
         if (timer >= WAIT_PERIOD)
         {
-            missionManager.Inform(GameAction.FightInProgress);
+            missionManager.Inform(GameAction.FightInProgress, null);
             Node iceStartNode = thePlayer.currentNode == theIce.startNode ? thePlayer.startNode : theIce.startNode;
             theIce.Reset(iceStartNode);
             thePlayer.GoOn();

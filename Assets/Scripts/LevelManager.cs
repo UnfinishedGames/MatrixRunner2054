@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
         interactionTimeElapsed.value += (Time.deltaTime * INTERACTION_SLIDER_INTERVAL);
         if (interactionTimeElapsed.value >= INTERACTION_SLIDER_MAX)
         {
-            missionManager.Inform(GameAction.NodeHacked);
+            missionManager.Inform(GameAction.NodeHacked, null);
             interactionTimeElapsed.value = INTERACTION_SLIDER_START;
             currentNode.SwitchState(State.Hacked);
             currentNode.InteractWithPlayer(playerCharacterSheet, missionManager);

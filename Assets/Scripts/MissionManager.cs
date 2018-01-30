@@ -1,4 +1,6 @@
 ﻿using MissionEngine;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,9 +31,9 @@ public class MissionManager : MonoBehaviour
 
     }
 
-    internal void Inform(GameAction action)
+    internal void Inform(GameAction action, Dictionary<Type, object> data)
     {
-        CurrentMission.Inform(action);
+        CurrentMission.Inform(action, data);
     }
 
     internal MissionState CheckMissionState()

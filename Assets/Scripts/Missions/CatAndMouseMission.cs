@@ -1,5 +1,6 @@
 ﻿using MissionEngine;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,9 +36,9 @@ public class CatAndMouseMission : Mission
         implementation.StartMission();
     }
 
-    public override void Inform(GameAction currentAction)
+    public override void Inform(GameAction currentAction, Dictionary<Type, object> data)
     {
-        implementation.Inform(currentAction);
+        implementation.Inform(currentAction, data);
     }
 
     public override MissionState AskMissionState()

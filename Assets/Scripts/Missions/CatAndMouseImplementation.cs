@@ -1,6 +1,7 @@
 ﻿
 using MissionEngine;
 using System;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class CatAndMouseImplementation
@@ -32,7 +33,7 @@ public class CatAndMouseImplementation
         currentState = MissionState.InProgress;
     }
 
-    public void Inform(GameAction currentAction)
+    public void Inform(GameAction currentAction, Dictionary<Type, object> data)
     {
         switch (currentAction)
         {
@@ -46,7 +47,8 @@ public class CatAndMouseImplementation
                 SendTheBlackIce();
                 break;
             case GameAction.FoundCurrency:
-                IncreaseFunds();
+                var fundsToAdd = (int)data[typeof(int)];
+                IncreaseFunds(fundsToAdd);
                 break;
             case GameAction.HackedWinningNode:
                 currentState = MissionState.Succeeded;
@@ -75,9 +77,9 @@ public class CatAndMouseImplementation
         blackIceToActivate.GoOn();
     }
 
-    private void IncreaseFunds()
+    private void IncreaseFunds(int fundsToAdd)
     {
-        funds += 500;
+        funds += fundsToAdd;
         PlayerFundsText.text = funds + " ¥";
     }
 }
