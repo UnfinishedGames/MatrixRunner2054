@@ -18,7 +18,8 @@ public class CatAndMouseImplementation
 
     public string GetDescription()
     {
-        return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than " + fightsUntilFail + " times";
+        return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than " + fightsUntilFail + " times," +
+            " or switch off the buildings cameras via the I/O node (triangle)";
     }
 
     public void StartMission()
@@ -40,6 +41,9 @@ public class CatAndMouseImplementation
                 break;
             case GameAction.AuthenticationFailed:
                 SendTheBlackIce();
+                break;
+            case GameAction.HackedWinningNode:
+                currentState = MissionState.Succeeded;
                 break;
             default:
                 throw new InvalidOperationException("currentAction");

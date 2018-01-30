@@ -4,6 +4,7 @@
     {
         FightInProgress,
         NodeHacked,
-        AuthenticationFailed
+        AuthenticationFailed,
+        HackedWinningNode
     }
 }

@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
             missionManager.Inform(GameAction.NodeHacked);
             interactionTimeElapsed.value = INTERACTION_SLIDER_START;
             currentNode.SwitchState(State.Hacked);
-            currentNode.InteractWithPlayer(playerCharacterSheet, moneyIndicatorText);
+            currentNode.InteractWithPlayer(playerCharacterSheet, moneyIndicatorText, missionManager);
         }
     }
 

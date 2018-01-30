@@ -13,12 +13,14 @@ public class Node : MonoBehaviour {
     public Dictionary<Direction, Node> possibleDirections = null;
     private SpriteRenderer mySprite;
     private DataStoreContents myContents;
+    private IOPortConnections myConnection;
     private State currentState = State.Initial;
 
     void Start()
     {
         mySprite = GetComponentInChildren<SpriteRenderer>();
         myContents = GetComponentInChildren<DataStoreContents>();
+        myConnection = GetComponentInChildren<IOPortConnections>();
     }
 
     void Update()
@@ -75,11 +77,15 @@ public class Node : MonoBehaviour {
         }
     }
 
-    internal void InteractWithPlayer(PlayerCharacterSheet playerCharacterSheet, Text moneyIndicatorText)
+    internal void InteractWithPlayer(PlayerCharacterSheet playerCharacterSheet, Text moneyIndicatorText, MissionManager missionManager)
     {
         if (myContents != null)
         {
             myContents.Interact(playerCharacterSheet, moneyIndicatorText);
+        }
+        if (myConnection != null)
+        {
+            myConnection.Interact(missionManager);
         }
     }
 }
