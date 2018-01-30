@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpecificContents : MonoBehaviour
+public class SpecificAction : MonoBehaviour
 {
     public virtual void Interact(PlayerCharacterSheet player, MissionManager missionManager)
     {

@@ -1,6 +1,6 @@
-﻿class CameraConnection : SpecificConnection
+﻿class CameraConnection : SpecificAction
 {
-    internal override void Interact(MissionManager missionManager)
+    public override void Interact(PlayerCharacterSheet player, MissionManager missionManager)
     {
         missionManager.Inform(MissionEngine.GameAction.HackedWinningNode);
     }

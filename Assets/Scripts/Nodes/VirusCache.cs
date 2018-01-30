@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 
-class VirusCache : SpecificContents
+class VirusCache : SpecificAction
 {
     public int UpgradeBy;
 

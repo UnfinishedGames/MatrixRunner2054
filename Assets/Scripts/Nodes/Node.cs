@@ -8,18 +8,15 @@ public class Node : MonoBehaviour {
     public GameObject rightObject;
     public GameObject upObject;
     public GameObject downObject;
+    public SpecificAction Action;
 
     public Dictionary<Direction, Node> possibleDirections = null;
     private SpriteRenderer mySprite;
-    private DataStoreContents myContents;
-    private IOPortConnections myConnection;
     private State currentState = State.Initial;
 
     void Start()
     {
         mySprite = GetComponentInChildren<SpriteRenderer>();
-        myContents = GetComponentInChildren<DataStoreContents>();
-        myConnection = GetComponentInChildren<IOPortConnections>();
     }
 
     void Update()
@@ -78,13 +75,11 @@ public class Node : MonoBehaviour {
 
     internal void InteractWithPlayer(PlayerCharacterSheet playerCharacterSheet, MissionManager missionManager)
     {
-        if (myContents != null)
-        {
-            myContents.Interact(playerCharacterSheet, missionManager);
-        }
-        if (myConnection != null)
-        {
-            myConnection.Interact(missionManager);
-        }
+        Interact(playerCharacterSheet, missionManager);
+    }
+
+    internal void Interact(PlayerCharacterSheet player, MissionManager missionManager)
+    {
+        Action.Interact(player, missionManager);
     }
 }
