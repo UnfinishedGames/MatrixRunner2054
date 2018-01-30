@@ -5,6 +5,7 @@
         FightInProgress,
         NodeHacked,
         AuthenticationFailed,
-        HackedWinningNode
+        HackedWinningNode,
+        FoundCurrency
     }
 }

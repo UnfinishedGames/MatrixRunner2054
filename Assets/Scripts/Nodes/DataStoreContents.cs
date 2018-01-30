@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class DataStoreContents : MonoBehaviour
 {
     public SpecificContents Contents;
 
-    internal void Interact(PlayerCharacterSheet player, Text moneyIndicatorText)
+    internal void Interact(PlayerCharacterSheet player, MissionManager missionManager)
     {
-        Contents.Interact(player, moneyIndicatorText);
+        Contents.Interact(player, missionManager);
     }
 }

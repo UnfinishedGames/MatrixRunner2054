@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class Node : MonoBehaviour {
@@ -77,11 +76,11 @@ public class Node : MonoBehaviour {
         }
     }
 
-    internal void InteractWithPlayer(PlayerCharacterSheet playerCharacterSheet, Text moneyIndicatorText, MissionManager missionManager)
+    internal void InteractWithPlayer(PlayerCharacterSheet playerCharacterSheet, MissionManager missionManager)
     {
         if (myContents != null)
         {
-            myContents.Interact(playerCharacterSheet, moneyIndicatorText);
+            myContents.Interact(playerCharacterSheet, missionManager);
         }
         if (myConnection != null)
         {

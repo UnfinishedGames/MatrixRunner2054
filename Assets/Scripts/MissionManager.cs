@@ -1,11 +1,11 @@
 ﻿using MissionEngine;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour
 {
     private Text missionText;
+    private Text moneyText;
     private RuleEngine ruleEngine;
 
     public RectTransform MissionIndicator;

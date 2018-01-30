@@ -1,5 +1,7 @@
 ﻿using MissionEngine;
 using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class CatAndMouseMission : Mission
 {
@@ -8,6 +10,7 @@ public class CatAndMouseMission : Mission
     public int FightsUntilFail = 0;
     public int NodesToHack = 0;
     public IceMovement BlackIceToActivate;
+    public RectTransform FundsIndicator;
 
     public CatAndMouseMission()
     {
@@ -17,6 +20,7 @@ public class CatAndMouseMission : Mission
     private void Start()
     {
         implementation.BlackIceToActivate = BlackIceToActivate;
+        implementation.PlayerFundsText = FundsIndicator.GetComponentInChildren<Text>();
     }
 
     public override string GetDescription()

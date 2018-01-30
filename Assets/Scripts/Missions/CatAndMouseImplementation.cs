@@ -1,6 +1,7 @@
 ﻿
 using MissionEngine;
 using System;
+using UnityEngine.UI;
 
 public class CatAndMouseImplementation
 {
@@ -11,15 +12,17 @@ public class CatAndMouseImplementation
     private int fightsUntilFail = 0;
     private int nodesToHack = 0;
     private IceMovement blackIceToActivate;
+    private int funds = 0;
+
 
     public int FightsUntilFail { set { fightsUntilFail = value; } }
     public int NodesToHack { set { nodesToHack = value; } }
     public IceMovement BlackIceToActivate  { set { blackIceToActivate = value; } }
-
+    public Text PlayerFundsText { get; internal set; }
     public string GetDescription()
     {
         return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than " + fightsUntilFail + " times," +
-            " or switch off the buildings cameras via the I/O node (triangle)";
+            " or switch off the buildings cameras via the I/O node (triangle). You can also find up to 1000 ¥";
     }
 
     public void StartMission()
@@ -41,6 +44,9 @@ public class CatAndMouseImplementation
                 break;
             case GameAction.AuthenticationFailed:
                 SendTheBlackIce();
+                break;
+            case GameAction.FoundCurrency:
+                IncreaseFunds();
                 break;
             case GameAction.HackedWinningNode:
                 currentState = MissionState.Succeeded;
@@ -67,5 +73,11 @@ public class CatAndMouseImplementation
     private void SendTheBlackIce()
     {
         blackIceToActivate.GoOn();
+    }
+
+    private void IncreaseFunds()
+    {
+        funds += 500;
+        PlayerFundsText.text = funds + " ¥";
     }
 }
