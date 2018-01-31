@@ -4,6 +4,7 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 public class Node : MonoBehaviour {
+    public byte NodeLevel;
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
@@ -80,6 +81,9 @@ public class Node : MonoBehaviour {
 
     internal void Interact(PlayerCharacterSheet player, MissionManager missionManager)
     {
-        Action.Interact(player, missionManager);
+        if (Action != null)
+        {
+            Action.Interact(player, missionManager);
+        }
     }
 }
