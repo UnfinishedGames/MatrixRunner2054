@@ -23,7 +23,7 @@ public class CatAndMouseImplementation
     public string GetDescription()
     {
         return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than " + fightsUntilFail + " times," +
-            " or switch off the buildings cameras via the I/O node (triangle). You can also find up to 1000 ¥";
+            " or switch off the buildings cameras via the slave node (circle). You can also find up to 1000 ¥";
     }
 
     public void StartMission()

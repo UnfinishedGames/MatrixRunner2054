@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove = true;
     private PlayerKeyInteractions keyInteractions;
     private Node nextNode;
+    private bool endPlayerRound;
 
     public Node startNode { get; private set; }
     
@@ -23,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     public bool Action()
     {
         var done = false;
+        if(endPlayerRound)
+        {
+            endPlayerRound = false;
+            return true;
+        }
         if (canMove)
         {
             var releasedKey = keyInteractions.CheckKeyUp();
@@ -45,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
     public void GoOn()
     {
         canMove = true;
+
+    }
+
+    public void EndRound()
+    {
+        endPlayerRound = true;
     }
 
     public void SetToStart()

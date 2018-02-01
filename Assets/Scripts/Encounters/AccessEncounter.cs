@@ -8,7 +8,7 @@ public class AccessEncounter : EncounterBase, IEncounter
 
     private float timer = TIMER_START_VALUE;
     private bool timerIsRunning = false;
-    private bool AlreadyTriedAuthenticating = false;
+    private bool alreadyTriedAuthenticating = false;
     private IceLocation theIce;
 
     void Start()
@@ -19,7 +19,7 @@ public class AccessEncounter : EncounterBase, IEncounter
 
     public void Interaction(PlayerMovement player)
     {
-        if (!timerIsRunning && !AlreadyTriedAuthenticating)
+        if (!timerIsRunning && !alreadyTriedAuthenticating)
         {
             actionIndicator.gameObject.SetActive(true);
             actionIndicatorText.text = "authenticating";
@@ -78,7 +78,7 @@ public class AccessEncounter : EncounterBase, IEncounter
 
     private bool InPlayerFailureState()
     {
-        return timerIsRunning && AlreadyTriedAuthenticating;
+        return timerIsRunning && alreadyTriedAuthenticating;
     }
 
     private void EndEncounterInFailureState()
@@ -99,7 +99,7 @@ public class AccessEncounter : EncounterBase, IEncounter
 
     private void SetPlayerWinState()
     {
-        AlreadyTriedAuthenticating = true;
+        alreadyTriedAuthenticating = true;
         thePlayer.GoOn();
         actionIndicator.gameObject.SetActive(false);
         timerIsRunning = false;
@@ -107,7 +107,7 @@ public class AccessEncounter : EncounterBase, IEncounter
 
     private void SetPlayerFailureState()
     {
-        AlreadyTriedAuthenticating = true;
+        alreadyTriedAuthenticating = true;
         actionIndicatorText.text = "...failed";
         timerIsRunning = true;
     }
