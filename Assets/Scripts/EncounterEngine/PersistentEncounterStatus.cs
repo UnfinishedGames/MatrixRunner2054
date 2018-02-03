@@ -1,25 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PersistentEncounterStatus : MonoBehaviour {
     public PlayerMovement player;
     public EncounterStatus status = EncounterStatus.Unavailable;
+    
+    private static PersistentEncounterStatus _persistentStatus;
 
-    void Awake()
+    public static PersistentEncounterStatus FetchPersistentStatus()
     {
-        //DontDestroyOnLoad(transform.gameObject);
+        if (_persistentStatus == null)
+        {
+            GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+            foreach (GameObject gameObject in rootGameObjects)
+            {
+                if (gameObject.name == "PersistentEncounterStatus")
+                {
+                    _persistentStatus = gameObject.GetComponent<PersistentEncounterStatus>();
+                    break;
+                }
+            }
+        }
+
+        return _persistentStatus;
     }
 
-    // Use this for initialization
-    void Start()
+    public void Reset()
     {
-
-    }
- 
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (_persistentStatus)
+        {
+            _persistentStatus.status = EncounterStatus.Unavailable;
+        }
     }
 }

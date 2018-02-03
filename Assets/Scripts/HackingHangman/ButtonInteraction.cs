@@ -1,23 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using EncounterEngine.enums;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ButtonInteraction : MonoBehaviour {
-
+public class ButtonInteraction : MonoBehaviour
+{
     public void SetWin()
     {
-        GameObject[] rootGameObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
-        foreach (GameObject gameObject in rootGameObjects)
+        PersistentEncounterStatus persistentStatus = PersistentEncounterStatus.FetchPersistentStatus();
+
+        if (persistentStatus != null)
         {
-            if (gameObject.name == "PersistentEncounterStatus")
-            {
-                PersistentEncounterStatus status = gameObject.GetComponent<PersistentEncounterStatus>();
-                if (status != null)
-                {
-                    status.status = EncounterStatus.PlayerWins;
-                }
-                break;
-            }
+            persistentStatus.status = EncounterStatus.PlayerWins;
+            ClearScene(persistentStatus.player);
         }
+    }
+
+    public void SetLoose()
+    {
+        PersistentEncounterStatus persistentStatus = PersistentEncounterStatus.FetchPersistentStatus();
+
+        if (persistentStatus != null)
+        {
+            persistentStatus.status = EncounterStatus.PlayerLost;
+            ClearScene(persistentStatus.player);
+        }
+    }
+
+    private void ClearScene(PlayerMovement player)
+    {
+        SceneManager.UnloadSceneAsync(HackingTypes.HackingButton.ToString());
+        player.GoOn();
     }
 }

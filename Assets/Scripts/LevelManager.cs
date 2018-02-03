@@ -11,13 +11,8 @@ enum GameState
 
 public class LevelManager : MonoBehaviour
 {
-    private const byte INTERACTION_SLIDER_INTERVAL = 40;
-    private const byte INTERACTION_SLIDER_START = 0;
-    private const byte INTERACTION_SLIDER_MAX = 100;
-
     public PlayerMovement player;
     public IceLocation[] countermeasures;
-    public Slider interactionTimeElapsed;
     public RectTransform actionIndicator;
     public RectTransform gameOverIndicator;
     public MissionManager missionManager;
@@ -43,7 +38,6 @@ public class LevelManager : MonoBehaviour
 
     public Node TryToMovePlayer(Direction newDirection, Node currentNode)
     {
-        ResetInteractionSlider();
         return currentNode.getNeighbour(newDirection);
     }
 
@@ -54,29 +48,14 @@ public class LevelManager : MonoBehaviour
             return;
         }
         currentNode.Interact(player);
-        //UpdateInteractionSlider(currentNode);
     }
 
-    private void UpdateInteractionSlider(Node currentNode)
-    {
-        interactionTimeElapsed.value += (Time.deltaTime * INTERACTION_SLIDER_INTERVAL);
-        if (interactionTimeElapsed.value >= INTERACTION_SLIDER_MAX)
-        {
-            missionManager.Inform(GameAction.NodeHacked);
-            interactionTimeElapsed.value = INTERACTION_SLIDER_START;
-            currentNode.SwitchState(State.Hacked);
-        }
-    }
 
     private bool PlayerAndIceAreInTheSameNode(PlayerMovement player, IceLocation ice)
     {
         return player.currentNode == ice.currentNode;
     }
 
-    private void ResetInteractionSlider()
-    {
-        interactionTimeElapsed.value = INTERACTION_SLIDER_START;
-    }
 
     private void QuitOnEscape()
     {

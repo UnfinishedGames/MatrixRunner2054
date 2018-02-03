@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Node : MonoBehaviour {
+public class Node : MonoBehaviour
+{
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
@@ -32,7 +33,7 @@ public class Node : MonoBehaviour {
         {
             if (myEncounter.Status() == EncounterStatus.PlayerLost)
             {
-                this.currentState = State.Initial;
+                this.currentState = State.Blocked;
                 this.myEncounter = null;
             }
             else if (myEncounter.Status() == EncounterStatus.PlayerWins)
@@ -79,27 +80,11 @@ public class Node : MonoBehaviour {
     {
         if (this.myEncounter == null)
         {
+            PersistentEncounterStatus.FetchPersistentStatus().Reset();
             this.myEncounter = GetComponentInChildren<IEncounter>();
             if (this.myEncounter != null)
             {
                 myEncounter.Interaction(player);
-            }
-        }
-        else
-        {
-            if (myEncounter.Status() == EncounterStatus.PlayerLost)
-            {
-                this.currentState = State.Initial;
-                this.myEncounter = null;
-            }
-            else if (myEncounter.Status() == EncounterStatus.PlayerWins)
-            {
-                this.currentState = State.Hacked;
-                this.myEncounter = null;
-            }
-            else
-            {
-                // Nothing
             }
         }
     }
@@ -113,14 +98,17 @@ public class Node : MonoBehaviour {
     {
         switch (currentState)
         {
-        case State.Initial:
-            mySprite.color = Color.white;
-            break;
-        case State.Hacked:
-            mySprite.color = Color.green;
-            break;
-        default:
-            throw new ArgumentOutOfRangeException("currentState");
+            case State.Initial:
+                mySprite.color = Color.white;
+                break;
+            case State.Hacked:
+                mySprite.color = Color.green;
+                break;
+            case State.Blocked:
+                mySprite.color = Color.red;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("currentState");
         }
     }
 }
