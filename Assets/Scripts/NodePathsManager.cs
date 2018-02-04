@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using NUnit.Framework.Interfaces;
-using NUnit.Framework;
 
 /// <summary>
 /// Draws the paths between the nodes.
-/// 
+///
 /// The NodeManager must be attached to some GameObject that also contains a "path"-Object.
-/// The "path" object only contains a line renderer. The "path" object will be 
+/// The "path" object only contains a line renderer. The "path" object will be
 /// duplicated dynamically for each drawn line.
-/// 
+///
 /// Optimizations:
 /// * draw only when a node was moved.
 /// </summary>
@@ -19,7 +16,7 @@ using NUnit.Framework;
 public class NodePathsManager : MonoBehaviour {
 
     public GameObject path;
-   
+
     private Dictionary<Node, List<Node> > pathStorage = new Dictionary<Node, List<Node> >();
 
     void Start()
@@ -60,7 +57,7 @@ public class NodePathsManager : MonoBehaviour {
             Node foundNode = gameObject.GetComponent<Node>();
             if (foundNode)
             {
-                DrawSinglePath(foundNode); 
+                DrawSinglePath(foundNode);
             }
         }
     }
@@ -89,7 +86,7 @@ public class NodePathsManager : MonoBehaviour {
         newLineRenderer.enabled = true;
         newPath.hideFlags = HideFlags.NotEditable | HideFlags.DontSave;
         Vector3[] points = new Vector3[2]{ startPosition, endPosition };
-        newLineRenderer.SetPositions(points); 
+        newLineRenderer.SetPositions(points);
     }
 
     private bool LineAlreadyDrawn(Node other, Node currentNode)
