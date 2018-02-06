@@ -6,11 +6,13 @@ public class ICEMovement : MonoBehaviour
 {
     public float RangeX = 3.0f;
     public float Speed = 1.0f;
+    public GameObject _currentBullet;
+
     private bool _isMoving = false;
-
     private Vector3 _destination;
-
     private float _speedModifier;
+    private float _bulletTimePassed = 0.0f;
+    private const float _bulletFireTime = 2.0f;
 
     // Use this for initialization
     void Start()
@@ -22,6 +24,7 @@ public class ICEMovement : MonoBehaviour
     void Update()
     {
         Move();
+        FireBullet();
     }
 
     private void Move()
@@ -41,7 +44,7 @@ public class ICEMovement : MonoBehaviour
         else
         {
             transform.Translate(new Vector3(Math.Sign(_destination.x), 0, 0) * Time.deltaTime * Speed *
-                                _speedModifier);
+            _speedModifier);
             if (OnDestination(_destination))
             {
                 _isMoving = false;
@@ -49,10 +52,20 @@ public class ICEMovement : MonoBehaviour
         }
     }
 
+    private void FireBullet()
+    {
+        _bulletTimePassed += Time.deltaTime;
+        if (_bulletTimePassed > _bulletFireTime)
+        {
+            FireWeapon();
+            _bulletTimePassed = 0.0f;
+        }
+    }
+
     private bool OnDestination(Vector3 destination)
     {
         const float
-            deltaValue = 0.01f; // used to avoid deadlocks when the object cannot be transformed that small value
+        deltaValue = 0.01f; // used to avoid deadlocks when the object cannot be transformed that small value
         var onDestination = false;
         if (Math.Sign(_destination.x) == -1)
         {
@@ -70,5 +83,12 @@ public class ICEMovement : MonoBehaviour
         }
 
         return onDestination;
+    }
+
+    private void FireWeapon()
+    {
+        Transform transform = GetComponent<Transform>();
+        GameObject bullet = Instantiate(_currentBullet, transform.position, transform.rotation) as GameObject;
+        bullet.GetComponent<BulletBehaviour>().fire();
     }
 }
