@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Node : MonoBehaviour {
+public class Node : MonoBehaviour 
+{
     public byte NodeLevel;
     public GameObject leftObject;
     public GameObject rightObject;
@@ -14,6 +15,7 @@ public class Node : MonoBehaviour {
     public Dictionary<Direction, Node> possibleDirections = null;
     private SpriteRenderer mySprite;
     private State currentState = State.Initial;
+    private IEncounter myEncounter = null;
 
     void Start()
     {
@@ -22,8 +24,30 @@ public class Node : MonoBehaviour {
 
     void Update()
     {
+        CheckEncounter();
         InitializeForEditor();
         UpdateView();
+    }
+
+    private void CheckEncounter()
+    {
+        if (this.myEncounter != null)
+        {
+            if (myEncounter.Status() == EncounterStatus.PlayerLost)
+            {
+                this.currentState = State.Blocked;
+                this.myEncounter = null;
+            }
+            else if (myEncounter.Status() == EncounterStatus.PlayerWins)
+            {
+                this.currentState = State.Hacked;
+                this.myEncounter = null;
+            }
+            else
+            {
+                // Nothing
+            }
+        }
     }
 
     private void InitializeForEditor()
@@ -54,6 +78,19 @@ public class Node : MonoBehaviour {
         return possibleDirections[direction];
     }
 
+    public void Interact(PlayerMovement player)
+    {
+        if (this.myEncounter == null)
+        {
+            PersistentEncounterStatus.FetchPersistentStatus().Reset();
+            this.myEncounter = GetComponentInChildren<IEncounter>();
+            if (this.myEncounter != null)
+            {
+                myEncounter.Interaction(player);
+            }
+        }
+    }
+
     private Node NodeFromObjectOrMyself(GameObject gameObj)
     {
         return gameObj != null ? gameObj.GetComponent<Node>() : this;
@@ -63,14 +100,17 @@ public class Node : MonoBehaviour {
     {
         switch (currentState)
         {
-        case State.Initial:
-            mySprite.color = Color.white;
-            break;
-        case State.Hacked:
-            mySprite.color = Color.green;
-            break;
-        default:
-            throw new ArgumentOutOfRangeException("currentState");
+            case State.Initial:
+                mySprite.color = Color.white;
+                break;
+            case State.Hacked:
+                mySprite.color = Color.green;
+                break;
+            case State.Blocked:
+                mySprite.color = Color.red;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("currentState");
         }
     }
 

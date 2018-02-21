@@ -1,5 +1,6 @@
 ﻿public enum State
 {
     Initial,
-    Hacked
+    Hacked,
+    Blocked
 }

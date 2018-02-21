@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BlackIceFight.unity
     guid: 00374cc0611997a48a65d0b2b4eb5847
+  - enabled: 1
+    path: Assets/Scenes/HackingButton.unity
+    guid: 53f9ce12739f3451d8af1fbd6060294c
+  - enabled: 1
+    path: Assets/Scenes/HackingSlider.unity
+    guid: eecd6c6f2e5c846afbfcd6e4d6374d61
