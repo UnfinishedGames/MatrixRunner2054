@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerControl : PlayerHealth
+public class PlayerControl : MonoBehaviour
 {
 
     // Use this for initialization

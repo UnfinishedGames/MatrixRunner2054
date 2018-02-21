@@ -4,7 +4,6 @@
 
 public class PlayerHealth : MonoBehaviour
 {
-    public string myName;
     public float startingHealth = 100;
     //    public Slider healthBar;
     private float currentHealth;
@@ -22,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amountOfDamage;
 //        UpdateHealthBar();
+        Debug.Log(currentHealth.ToString());
         if (currentHealth <= 0)
         {
             Debug.Log("I am Dead!");

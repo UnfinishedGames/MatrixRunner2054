@@ -6,13 +6,15 @@ public class ICEMovement : MonoBehaviour
 {
     public float RangeX = 3.0f;
     public float Speed = 1.0f;
-    public GameObject _currentBullet;
+    public GameObject GenericBullet;
+    public GameObject SweeperBullet;
+    public float FireSpeedModifier = 1.0f;
 
     private bool _isMoving = false;
     private Vector3 _destination;
     private float _speedModifier;
     private float _bulletTimePassed = 0.0f;
-    private const float _bulletFireTime = 2.0f;
+    private const float _bulletFireTime = 1.0f;
 
     // Use this for initialization
     void Start()
@@ -24,7 +26,8 @@ public class ICEMovement : MonoBehaviour
     void Update()
     {
         Move();
-        FireBullet();
+        FireGenericBullet();
+        FireSweeperBullet();
     }
 
     private void Move()
@@ -52,12 +55,22 @@ public class ICEMovement : MonoBehaviour
         }
     }
 
-    private void FireBullet()
+    private void FireGenericBullet()
     {
         _bulletTimePassed += Time.deltaTime;
-        if (_bulletTimePassed > _bulletFireTime)
+        if (_bulletTimePassed * FireSpeedModifier > _bulletFireTime)
         {
-            FireWeapon();
+            FireGeneric();
+            _bulletTimePassed = 0.0f;
+        }
+    }
+
+    private void FireSweeperBullet()
+    {
+        _bulletTimePassed += Time.deltaTime;
+        if (_bulletTimePassed * FireSpeedModifier > _bulletFireTime)
+        {
+            FireSweeper();
             _bulletTimePassed = 0.0f;
         }
     }
@@ -85,10 +98,17 @@ public class ICEMovement : MonoBehaviour
         return onDestination;
     }
 
-    private void FireWeapon()
+    private void FireGeneric()
     {
         Transform transform = GetComponent<Transform>();
-        GameObject bullet = Instantiate(_currentBullet, transform.position, transform.rotation) as GameObject;
+        GameObject bullet = Instantiate(GenericBullet, transform.position, transform.rotation) as GameObject;
         bullet.GetComponent<BulletBehaviour>().fire();
+    }
+
+    private void FireSweeper()
+    {
+        Transform transform = GetComponent<Transform>();
+        GameObject bullet = Instantiate(SweeperBullet, transform.position, transform.rotation) as GameObject;
+        bullet.GetComponent<SweepBulletBehaviour>().fire();
     }
 }
