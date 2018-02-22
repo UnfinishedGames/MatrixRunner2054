@@ -114,12 +114,12 @@ public class Node : MonoBehaviour
         }
     }
 
-    internal void InteractWithPlayer(PlayerCharacterSheet playerCharacterSheet, MissionManager missionManager)
+    internal void GivePlayerAccess(PlayerCharacterSheet playerCharacterSheet, MissionManager missionManager)
     {
-        Interact(playerCharacterSheet, missionManager);
+        Access(playerCharacterSheet, missionManager);
     }
 
-    internal void Interact(PlayerCharacterSheet player, MissionManager missionManager)
+    internal void Access(PlayerCharacterSheet player, MissionManager missionManager)
     {
         if (Action != null)
         {

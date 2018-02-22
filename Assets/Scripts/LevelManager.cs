@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using MissionEngine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,20 @@ public class LevelManager : MonoBehaviour
         QuitOnEscape();
         CheckVictoryConditions();
         CheckIfFightIsOn();
+        // check persistenttate -> state is PlayerWins
+        // interact with node
+        CheckIfNodeIsUnlocked();
+    }
+
+    private void CheckIfNodeIsUnlocked()
+    {
+        var state = PersistentEncounterStatus.FetchPersistentStatus();
+        if(state.status == EncounterStatus.PlayerWins)
+        {
+            state.status = EncounterStatus.Unavailable;
+            var currentNode = player.currentNode;
+            currentNode.GivePlayerAccess(playerCharacterSheet, missionManager);
+        }
     }
 
     public Node TryToMovePlayer(Direction newDirection, Node currentNode)
