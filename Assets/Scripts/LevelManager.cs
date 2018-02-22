@@ -4,8 +4,7 @@ using MissionEngine;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum GameState
-{
+enum GameState {
     GAMESTATE_PLAYER_ACTION = 0,
     GAMESTATE_ICE_ACTION,
 }
@@ -39,20 +38,6 @@ public class LevelManager : MonoBehaviour
         QuitOnEscape();
         CheckVictoryConditions();
         CheckIfFightIsOn();
-        // check persistenttate -> state is PlayerWins
-        // interact with node
-        CheckIfNodeIsUnlocked();
-    }
-
-    private void CheckIfNodeIsUnlocked()
-    {
-        var state = PersistentEncounterStatus.FetchPersistentStatus();
-        if(state.status == EncounterStatus.PlayerWins)
-        {
-            state.status = EncounterStatus.Unavailable;
-            var currentNode = player.currentNode;
-            currentNode.GivePlayerAccess(playerCharacterSheet, missionManager);
-        }
     }
 
     public Node TryToMovePlayer(Direction newDirection, Node currentNode)
@@ -87,7 +72,7 @@ public class LevelManager : MonoBehaviour
     private void CheckVictoryConditions()
     {
         var state = missionManager.CheckMissionState();
-        if(state == MissionState.InProgress)
+        if (state == MissionState.InProgress)
         {
             return;
         }
@@ -105,7 +90,7 @@ public class LevelManager : MonoBehaviour
 
     private void CheckIfFightIsOn()
     {
-        foreach(IceLocation ice in countermeasures)
+        foreach (IceLocation ice in countermeasures)
         {
             if (PlayerAndIceAreInTheSameNode(player, ice))
             {
@@ -118,7 +103,7 @@ public class LevelManager : MonoBehaviour
     {
         switch (gameState)
         {
-            case GameState.GAMESTATE_PLAYER_ACTION:
+        case GameState.GAMESTATE_PLAYER_ACTION:
             {
                 if (true == player.Action())
                 {
@@ -126,7 +111,7 @@ public class LevelManager : MonoBehaviour
                 }
                 break;
             }
-            case GameState.GAMESTATE_ICE_ACTION:
+        case GameState.GAMESTATE_ICE_ACTION:
             {
                 if (AllICsHaveMoved())
                 {
