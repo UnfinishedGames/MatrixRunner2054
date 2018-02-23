@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Node : MonoBehaviour 
 {
-    public byte NodeLevel;
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
