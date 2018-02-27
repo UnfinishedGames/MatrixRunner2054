@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class CurrencyCache : SpecificAction
 {
     public int Amount;
-    public override void Interact(PlayerCharacterSheet player, MissionManager missionManager)
+    public override void Interact(Node callingNode, PlayerCharacterSheet player, MissionManager missionManager)
     {
         var data = new Dictionary<Type, object>
         {

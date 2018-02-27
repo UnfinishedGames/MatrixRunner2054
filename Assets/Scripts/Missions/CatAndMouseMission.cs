@@ -12,6 +12,7 @@ public class CatAndMouseMission : Mission
     public int NodesToHack = 0;
     public IceMovement BlackIceToActivate;
     public RectTransform FundsIndicator;
+    public MonoBehaviour WinningNode;
 
     public CatAndMouseMission()
     {
@@ -22,6 +23,7 @@ public class CatAndMouseMission : Mission
     {
         implementation.BlackIceToActivate = BlackIceToActivate;
         implementation.PlayerFundsText = FundsIndicator.GetComponentInChildren<Text>();
+        implementation.WinningNode = WinningNode;
     }
 
     public override string GetDescription()

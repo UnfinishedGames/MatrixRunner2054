@@ -122,7 +122,7 @@ public class Node : MonoBehaviour
     {
         if (Action != null)
         {
-            Action.Interact(player, missionManager);
+            Action.Interact(this, player, missionManager);
         }
     }
 }

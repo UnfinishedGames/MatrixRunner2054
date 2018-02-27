@@ -1,7 +1,8 @@
-﻿
-using MissionEngine;
+﻿using MissionEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CatAndMouseImplementation
@@ -20,6 +21,8 @@ public class CatAndMouseImplementation
     public int NodesToHack { set { nodesToHack = value; } }
     public IceMovement BlackIceToActivate  { set { blackIceToActivate = value; } }
     public Text PlayerFundsText { get; internal set; }
+    public MonoBehaviour WinningNode { get; internal set; }
+
     public string GetDescription()
     {
         return "Mission:\r\n Hack " + nodesToHack + " nodes while being caught less than " + fightsUntilFail + " times," +
@@ -42,6 +45,14 @@ public class CatAndMouseImplementation
                 break;
             case GameAction.NodeHacked:
                 nodesAlreadyHacked++;
+                if(data != null && data.Keys.Contains(typeof(Node)))
+                {
+                    var hackedNode = (Node)data[typeof(Node)];
+                    if(hackedNode == WinningNode)
+                    {
+                        currentState = MissionState.Succeeded;
+                    }
+                }
                 break;
             case GameAction.AuthenticationFailed:
                 SendTheBlackIce();
