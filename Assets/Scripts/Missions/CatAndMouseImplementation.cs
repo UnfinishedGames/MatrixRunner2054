@@ -80,6 +80,7 @@ public class CatAndMouseImplementation
     private void IncreaseFunds(int fundsToAdd)
     {
         funds += fundsToAdd;
+        if (PlayerFundsText == null) return;
         PlayerFundsText.text = funds + " ¥";
     }
 }

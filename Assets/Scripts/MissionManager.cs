@@ -7,19 +7,19 @@ using UnityEngine.UI;
 public class MissionManager : MonoBehaviour
 {
     private Text missionText;
-    private RuleEngine ruleEngine;
+    private ShadwowrunTwoRuleEngine ruleEngine;
 
     public RectTransform MissionIndicator;
     public CatAndMouseMission CurrentMission;
 
-    public RuleEngine RuleEngine
+    public ShadwowrunTwoRuleEngine RuleEngine
     {
         get { return ruleEngine; }
     }
 
     void Start()
     {
-        ruleEngine = new RuleEngine();
+        ruleEngine = new ShadwowrunTwoRuleEngine();
 
         missionText = MissionIndicator.GetComponentInChildren<Text>();
         missionText.text = CurrentMission.GetDescription();

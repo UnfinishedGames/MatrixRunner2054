@@ -22,7 +22,7 @@ public class PlayerCharacterSheet : MonoBehaviour
     public void UpdateCharacterSheet()
     {
         characterSheet.MaskingkAttribute = MaskingkAttribute;
-        characterSheet.DeceptionProgram = DeceptionProgram;
+        characterSheet.DeceptionUtility = DeceptionProgram;
         characterSheet.Money = Money;
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 
-public class DiceRoller
+public class ShadowrunTwoDiceRoller
 {
     private Random generator;
 
-    public DiceRoller(long seed)
+    public ShadowrunTwoDiceRoller(long seed)
     {
         generator = new Random((int)seed);
     }

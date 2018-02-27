@@ -4,12 +4,12 @@ using FluentAssertions;
 namespace MissionEngine.Tests.cs.EncounterEngine
 {
     [TestClass]
-    public class RuleEngineTests
+    public class ShadowrunTwoRuleEngineTests
     {
         [TestMethod]
         public void CreateTheRuleEngine()
         {
-            var target = new RuleEngine();
+            var target = new ShadwowrunTwoRuleEngine();
             var targetCapsule = new PrivateObject(target);
             target.Should().NotBeNull();
             targetCapsule.GetFieldOrProperty("diceRoller").Should().NotBeNull();
@@ -18,12 +18,12 @@ namespace MissionEngine.Tests.cs.EncounterEngine
         [TestMethod]
         public void BeginnerPlayer_against_HighLevelIce_fails_DeceptionUtility()
         {
-            var target = new RuleEngine();
+            var target = new ShadwowrunTwoRuleEngine();
 
             var player = new CharacterSheet
             {
                 MaskingkAttribute = 2,
-                DeceptionProgram = 2
+                DeceptionUtility = 2
             };
 
             var ice = new ComponentSheet
@@ -39,12 +39,12 @@ namespace MissionEngine.Tests.cs.EncounterEngine
         [TestMethod]
         public void ExpertPlayer_against_LowLevelIce_succeeds_DeceptionUtility()
         {
-            var target = new RuleEngine();
+            var target = new ShadwowrunTwoRuleEngine();
 
             var player = new CharacterSheet
             {
                 MaskingkAttribute = 5,
-                DeceptionProgram = 7
+                DeceptionUtility = 7
             };
 
             var ice = new ComponentSheet
