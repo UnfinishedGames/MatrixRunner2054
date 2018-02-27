@@ -27,7 +27,7 @@ public class EncounterBase : MonoBehaviour
         var namePaths = objectName.Split('/');
         if (namePaths == null)
         {
-            namePaths = new[] {objectName};
+            namePaths = new[] { objectName };
         }
 
         GameObject foundObject = null;

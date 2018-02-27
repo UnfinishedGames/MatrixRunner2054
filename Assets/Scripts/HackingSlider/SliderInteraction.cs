@@ -11,10 +11,10 @@ public class SliderInteraction : MonoBehaviour
 
     public Slider interactionTimeElapsed;
 
-//	void Start()
-//	{
-//		PersistentEncounterStatus.FetchPersistentStatus().Reset();
-//	}
+    //	void Start()
+    //	{
+    //		PersistentEncounterStatus.FetchPersistentStatus().Reset();
+    //	}
 
     // Update is called once per frame
     void Update()
@@ -33,13 +33,6 @@ public class SliderInteraction : MonoBehaviour
             interactionTimeElapsed.value = INTERACTION_SLIDER_START;
             var persistentEncounterStatus = PersistentEncounterStatus.FetchPersistentStatus();
             persistentEncounterStatus.status = EncounterStatus.PlayerWins;
-            ClearScene(persistentEncounterStatus.player);
         }
-    }
-
-    private void ClearScene(PlayerMovement player)
-    {
-        SceneManager.UnloadSceneAsync(HackingTypes.HackingSlider.ToString());
-        player.GoOn();
     }
 }

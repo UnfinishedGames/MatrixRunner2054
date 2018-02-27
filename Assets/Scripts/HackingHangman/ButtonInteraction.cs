@@ -11,7 +11,6 @@ public class ButtonInteraction : MonoBehaviour
         if (persistentStatus != null)
         {
             persistentStatus.status = EncounterStatus.PlayerWins;
-            ClearScene(persistentStatus.player);
         }
     }
 
@@ -22,13 +21,6 @@ public class ButtonInteraction : MonoBehaviour
         if (persistentStatus != null)
         {
             persistentStatus.status = EncounterStatus.PlayerLost;
-            ClearScene(persistentStatus.player);
         }
-    }
-
-    private void ClearScene(PlayerMovement player)
-    {
-        SceneManager.UnloadSceneAsync(HackingTypes.HackingButton.ToString());
-        player.GoOn();
     }
 }

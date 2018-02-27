@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PersistentEncounterStatus : MonoBehaviour {
+public class PersistentEncounterStatus : MonoBehaviour
+{
     public PlayerMovement player;
     public EncounterStatus status = EncounterStatus.Unavailable;
     
