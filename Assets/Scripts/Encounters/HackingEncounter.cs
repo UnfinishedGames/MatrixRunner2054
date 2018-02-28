@@ -71,7 +71,7 @@ public class HackingEncounter : EncounterBase, IEncounter
             {
                 SceneManager.LoadScene(hackingType.ToString(), LoadSceneMode.Additive);
             }
-            catch (UnityException ex) // TODO: wtf? why does this not work?
+            catch // TODO: wtf? why does this not work?
             {
                 Debug.LogError("Could not load scene " + hackingType.ToString());
                 thePlayer.GoOn();

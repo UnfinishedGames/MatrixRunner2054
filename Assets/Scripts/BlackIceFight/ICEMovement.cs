@@ -13,8 +13,11 @@ public class ICEMovement : MonoBehaviour
     private bool _isMoving = false;
     private Vector3 _destination;
     private float _speedModifier;
-    private float _bulletTimePassed = 0.0f;
-    private const float _bulletFireTime = 1.0f;
+    private float _bulletTimePassedGeneric = 0.0f;
+    private float _bulletTimePassedSweeper = 0.0f;
+    private const float _bulletFireTimeGeneric = 1.0f;
+    private const float _bulletFireTimeSweeper = 1.0f;
+    private float currentHealth = 2;
 
     // Use this for initialization
     void Start()
@@ -57,21 +60,21 @@ public class ICEMovement : MonoBehaviour
 
     private void FireGenericBullet()
     {
-        _bulletTimePassed += Time.deltaTime;
-        if (_bulletTimePassed * FireSpeedModifier > _bulletFireTime)
+        _bulletTimePassedGeneric += Time.deltaTime;
+        if (_bulletTimePassedGeneric * FireSpeedModifier > _bulletFireTimeGeneric)
         {
-            FireGeneric();
-            _bulletTimePassed = 0.0f;
+            FireBullet(GenericBullet);
+            _bulletTimePassedGeneric = 0.0f;
         }
     }
 
     private void FireSweeperBullet()
     {
-        _bulletTimePassed += Time.deltaTime;
-        if (_bulletTimePassed * FireSpeedModifier > _bulletFireTime)
+        _bulletTimePassedSweeper += Time.deltaTime;
+        if (_bulletTimePassedSweeper * FireSpeedModifier > _bulletFireTimeSweeper)
         {
-            FireSweeper();
-            _bulletTimePassed = 0.0f;
+            FireBullet(SweeperBullet);
+            _bulletTimePassedSweeper = 0.0f;
         }
     }
 
@@ -98,17 +101,23 @@ public class ICEMovement : MonoBehaviour
         return onDestination;
     }
 
-    private void FireGeneric()
+    private void FireBullet(GameObject bulletType)
     {
         Transform transform = GetComponent<Transform>();
-        GameObject bullet = Instantiate(GenericBullet, transform.position, transform.rotation) as GameObject;
-        bullet.GetComponent<BulletBehaviour>().fire();
+        GameObject bullet = Instantiate(bulletType, transform.position, transform.rotation) as GameObject;
+        bullet.GetComponent<BulletBehaviour>().Fire(BulletDirection.Down, gameObject);
     }
 
-    private void FireSweeper()
+    public void TakeDamage(float amountOfDamage)
     {
-        Transform transform = GetComponent<Transform>();
-        GameObject bullet = Instantiate(SweeperBullet, transform.position, transform.rotation) as GameObject;
-        bullet.GetComponent<SweepBulletBehaviour>().fire();
+        currentHealth -= amountOfDamage;
+//        UpdateHealthBar();
+        Debug.Log("ICE: " + currentHealth.ToString());
+        if (currentHealth <= 0)
+        {
+            PersistentEncounterStatus.FetchPersistentStatus().status = EncounterStatus.PlayerWins;
+            Debug.Log("ICE: I am Dead!");
+//            counter.IAmDead(myName);
+        }
     }
 }
