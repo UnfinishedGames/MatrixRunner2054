@@ -1,7 +1,14 @@
-﻿class CameraConnection : SpecificAction
+﻿using System;
+using System.Collections.Generic;
+
+class CameraConnection : SpecificAction
 {
-    public override void Interact(PlayerCharacterSheet player, MissionManager missionManager)
+    public override void Interact(Node callingNode, PlayerCharacterSheet player, MissionManager missionManager)
     {
-        missionManager.Inform(MissionEngine.GameAction.HackedWinningNode, null);
+        var metaData = new Dictionary<Type, object>
+        {
+            { typeof(Node), callingNode }
+        };
+        missionManager.Inform(MissionEngine.GameAction.NodeHacked, metaData);
     }
 }

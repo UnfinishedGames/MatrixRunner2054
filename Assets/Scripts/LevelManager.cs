@@ -42,7 +42,9 @@ public class LevelManager : MonoBehaviour
 
     public Node TryToMovePlayer(Direction newDirection, Node currentNode)
     {
-        return currentNode.getNeighbour(newDirection);
+        var newCurrentNode = currentNode.getNeighbour(newDirection);
+        //give the persistentState the new current node
+        return newCurrentNode;
     }
 
     public void TryToInteractWithNode(Node currentNode)

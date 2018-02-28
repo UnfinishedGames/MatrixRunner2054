@@ -1,12 +1,12 @@
 ﻿using System;
 
-public class RuleEngine
+public class ShadwowrunTwoRuleEngine
 {
-    private DiceRoller diceRoller;
+    private ShadowrunTwoDiceRoller diceRoller;
 
-    public RuleEngine()
+    public ShadwowrunTwoRuleEngine()
     {
-        diceRoller = new DiceRoller(DateTime.Today.Ticks);
+        diceRoller = new ShadowrunTwoDiceRoller(DateTime.Today.Ticks);
     }
 
     public Winner RollOff(CharacterSheet player, ComponentSheet ice, ExecuteUtility utility)
@@ -23,7 +23,7 @@ public class RuleEngine
     private Winner PerformDeceptionCheck(CharacterSheet player, ComponentSheet ice)
     {
         var winner = Winner.Draw;
-        var playerRoll = diceRoller.MakeSuccessTest(player.DeceptionProgram, ice.SystemRating);
+        var playerRoll = diceRoller.MakeSuccessTest(player.DeceptionUtility, ice.SystemRating);
         if (playerRoll == 0)
         {
             if (diceRoller.MakeSuccessTest(ice.IceRating, player.MaskingkAttribute) > 0)

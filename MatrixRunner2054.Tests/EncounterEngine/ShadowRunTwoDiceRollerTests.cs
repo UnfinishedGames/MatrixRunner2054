@@ -4,16 +4,16 @@ using FluentAssertions;
 namespace MissionEngine.Tests.cs.Encounters
 {
     [TestClass]
-    public class DiceRollerTests
+    public class ShadowrunTwoDiceRollerTests
     {
         private const int COMMON_SEED = 3;
 
-        DiceRoller dieRoller;
+        ShadowrunTwoDiceRoller dieRoller;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            dieRoller = new DiceRoller(COMMON_SEED);
+            dieRoller = new ShadowrunTwoDiceRoller(COMMON_SEED);
         }
 
         [TestMethod]

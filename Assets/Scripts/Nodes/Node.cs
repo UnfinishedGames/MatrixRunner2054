@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Node : MonoBehaviour 
 {
-    public byte NodeLevel;
     public GameObject leftObject;
     public GameObject rightObject;
     public GameObject upObject;
@@ -123,7 +122,7 @@ public class Node : MonoBehaviour
     {
         if (Action != null)
         {
-            Action.Interact(player, missionManager);
+            Action.Interact(this, player, missionManager);
         }
     }
 }
