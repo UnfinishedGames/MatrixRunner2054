@@ -3,7 +3,6 @@ using FluentAssertions;
 
 namespace MissionEngine.Tests.cs.EncounterEngine
 {
-    [TestClass]
     public class ShadowrunTwoRuleEngineTests
     {
         [TestMethod]

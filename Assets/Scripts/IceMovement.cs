@@ -6,7 +6,7 @@ public class IceMovement : IceLocation {
     const float INTERVAL = 1.0f;
     const string NAME_OF_MOVE_FUNC = "Move";
 
-    private System.Random random;
+    private Random random;
     private bool canMove;
 
     void Start()
@@ -23,6 +23,8 @@ public class IceMovement : IceLocation {
     public void GoOn()
     {
         canMove = true;
+        isVisible = true;
+        UpdateView();
     }
 
     public void Reset(Node startNode)
