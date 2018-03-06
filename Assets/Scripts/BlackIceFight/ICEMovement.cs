@@ -115,7 +115,7 @@ public class ICEMovement : MonoBehaviour
         Debug.Log("ICE: " + currentHealth.ToString());
         if (currentHealth <= 0)
         {
-            PersistentEncounterStatus.FetchPersistentStatus().status = EncounterStatus.PlayerWins;
+            PersistentEncounterStatus.Instance.status = EncounterStatus.PlayerWins;
             Debug.Log("ICE: I am Dead!");
 //            counter.IAmDead(myName);
         }

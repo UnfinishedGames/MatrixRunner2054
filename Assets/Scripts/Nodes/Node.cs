@@ -81,7 +81,7 @@ public class Node : MonoBehaviour
     {
         if (this.myEncounter == null)
         {
-            PersistentEncounterStatus.FetchPersistentStatus().Reset();
+            PersistentEncounterStatus.Instance.Reset();
             this.myEncounter = GetComponentInChildren<IEncounter>();
             if (this.myEncounter != null)
             {

@@ -41,8 +41,11 @@ public class CatAndMouseImplementation
         switch (currentAction)
         {
             case GameAction.FightInProgress:
+            {
                 fightsAlreadyFought++;
+                // TODO: Should the ice reset n' stuff be done here?
                 break;
+            }
             case GameAction.NodeHacked:
                 nodesAlreadyHacked++;
                 if(data != null && data.Keys.Contains(typeof(Node)))

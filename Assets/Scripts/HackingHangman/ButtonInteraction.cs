@@ -6,7 +6,7 @@ public class ButtonInteraction : MonoBehaviour
 {
     public void SetWin()
     {
-        PersistentEncounterStatus persistentStatus = PersistentEncounterStatus.FetchPersistentStatus();
+        PersistentEncounterStatus persistentStatus = PersistentEncounterStatus.Instance;
 
         if (persistentStatus != null)
         {
@@ -16,7 +16,7 @@ public class ButtonInteraction : MonoBehaviour
 
     public void SetLoose()
     {
-        PersistentEncounterStatus persistentStatus = PersistentEncounterStatus.FetchPersistentStatus();
+        PersistentEncounterStatus persistentStatus = PersistentEncounterStatus.Instance;
 
         if (persistentStatus != null)
         {

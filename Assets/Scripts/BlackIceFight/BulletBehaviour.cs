@@ -24,6 +24,14 @@ public class BulletBehaviour : MonoBehaviour
     {
     }
 
+    public void Update()
+    {
+        if (PersistentEncounterStatus.Instance.status == EncounterStatus.Unavailable)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
@@ -37,7 +45,7 @@ public class BulletBehaviour : MonoBehaviour
 //                AudioSource.PlayClipAtPoint(hitSound, transform.position, 10.0f);
                 Destroy(gameObject);
             }
-            else if(ice != null && _origin.GetComponent<ICEMovement>() != ice)
+            else if (ice != null && _origin.GetComponent<ICEMovement>() != ice)
             {
                 ice.TakeDamage(damage);
 //                AudioSource.PlayClipAtPoint(hitSound, transform.position, 10.0f);

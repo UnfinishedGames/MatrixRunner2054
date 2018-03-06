@@ -1,36 +1,34 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PersistentEncounterStatus : MonoBehaviour
+public sealed class PersistentEncounterStatus
 {
     public PlayerMovement player;
     public EncounterStatus status = EncounterStatus.Unavailable;
     
-    private static PersistentEncounterStatus _persistentStatus;
+    private static readonly PersistentEncounterStatus instance = new PersistentEncounterStatus();
 
-    public static PersistentEncounterStatus FetchPersistentStatus()
+    // Explicit static constructor to tell C# compiler
+    // not to mark type as beforefieldinit
+    static PersistentEncounterStatus()
     {
-        if (_persistentStatus == null)
-        {
-            GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-            foreach (GameObject gameObject in rootGameObjects)
-            {
-                if (gameObject.name == "PersistentEncounterStatus")
-                {
-                    _persistentStatus = gameObject.GetComponent<PersistentEncounterStatus>();
-                    break;
-                }
-            }
-        }
-
-        return _persistentStatus;
     }
 
+    private PersistentEncounterStatus()
+    {
+    }
+
+    public static PersistentEncounterStatus Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    
     public void Reset()
     {
-        if (_persistentStatus)
-        {
-            _persistentStatus.status = EncounterStatus.Unavailable;
-        }
+        Instance.status = EncounterStatus.Unavailable;
     }
 }

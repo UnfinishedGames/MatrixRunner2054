@@ -31,7 +31,7 @@ public class SliderInteraction : MonoBehaviour
         if (interactionTimeElapsed.value >= INTERACTION_SLIDER_MAX)
         {
             interactionTimeElapsed.value = INTERACTION_SLIDER_START;
-            var persistentEncounterStatus = PersistentEncounterStatus.FetchPersistentStatus();
+            var persistentEncounterStatus = PersistentEncounterStatus.Instance;
             persistentEncounterStatus.status = EncounterStatus.PlayerWins;
         }
     }

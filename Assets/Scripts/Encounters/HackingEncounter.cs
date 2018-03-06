@@ -43,7 +43,7 @@ public class HackingEncounter : EncounterBase, IEncounter
     public new EncounterStatus Status()
     {
         EncounterStatus result = EncounterStatus.Unavailable;
-        var persistenStatus = PersistentEncounterStatus.FetchPersistentStatus();
+        var persistenStatus = PersistentEncounterStatus.Instance;
         if (persistenStatus != null)
         {
             result = persistenStatus.status;
@@ -58,7 +58,7 @@ public class HackingEncounter : EncounterBase, IEncounter
         this.thePlayer = player;
         thePlayer.Stay();
         this.node = player.currentNode;
-        PersistentEncounterStatus.FetchPersistentStatus().status = EncounterStatus.OnGoing;
+        PersistentEncounterStatus.Instance.status = EncounterStatus.OnGoing;
     }
 
     public void Interaction(PlayerMovement player)

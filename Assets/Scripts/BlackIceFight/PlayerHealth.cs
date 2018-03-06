@@ -68,7 +68,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log(currentHealth.ToString());
         if (currentHealth <= 0)
         {
-            PersistentEncounterStatus.FetchPersistentStatus().status = EncounterStatus.PlayerLost;
+            PersistentEncounterStatus.Instance.status = EncounterStatus.PlayerLost;
             Debug.Log("I am Dead!");
 //            counter.IAmDead(myName);
         }
