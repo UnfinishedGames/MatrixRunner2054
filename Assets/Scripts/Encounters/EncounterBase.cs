@@ -50,7 +50,7 @@ public class EncounterBase : MonoBehaviour
 
     public EncounterStatus Status()
     {
-        return EncounterStatus.Unavailable;
+        return PersistentEncounterStatus.Instance.status;
     }
 
 }

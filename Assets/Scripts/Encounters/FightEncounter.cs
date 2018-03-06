@@ -55,7 +55,8 @@ public class FightEncounter : EncounterBase, IEncounter
 
     public void Interaction(PlayerMovement player)
     {
-        if (PersistentEncounterStatus.Instance.status == EncounterStatus.Unavailable)
+        if (PersistentEncounterStatus.Instance.status == EncounterStatus.Unavailable
+            && !isActive)
         {
             PrepareEncounter(player);
             try

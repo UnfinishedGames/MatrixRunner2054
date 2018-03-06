@@ -26,7 +26,8 @@ public class BulletBehaviour : MonoBehaviour
 
     public void Update()
     {
-        if (PersistentEncounterStatus.Instance.status == EncounterStatus.Unavailable)
+        if (PersistentEncounterStatus.Instance.status == EncounterStatus.Unavailable &&
+            gameObject.name.Contains("clone"))
         {
             Destroy(gameObject);
         }
