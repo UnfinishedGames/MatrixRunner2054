@@ -8,16 +8,26 @@ namespace BlackIceFight
         public float FireSpeedModifier = 1.0f;
         public BulletDirection Direction = BulletDirection.Down;
         public const float _bulletFireTime = 1.0f;
+        public ObjectType Type;
+        public bool AutoFire = true;
 
         private float _bulletTimePassed = 0.0f;
+
+        private void Start()
+        {
+            _bulletTimePassed = _bulletFireTime; // So we can shoot immediately
+        }
 
         // Update is called once per frame
         void Update()
         {
-            FireBullet();
+            if (AutoFire)
+            {
+                FireBullet();
+            }
         }
 
-        private void FireBullet()
+        public void FireBullet()
         {
             _bulletTimePassed += Time.deltaTime;
             if (_bulletTimePassed * FireSpeedModifier > _bulletFireTime)

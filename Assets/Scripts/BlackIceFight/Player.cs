@@ -1,30 +1,27 @@
-﻿using UnityEngine;
+﻿using BlackIceFight;
+using UnityEngine;
 
 //using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float FireSpeedModifier = 1.0f;
     public float MovementModifier = 0.01f;
 
-    public GameObject CurrentBullet;
-
-    private float _bulletTimePassed = 0.0f;
-    private const float _bulletFireTime = 1.0f;
     private bool _isMoving = false;
+    private Weapon _weapon;
 
     private void Start()
     {
-        _bulletTimePassed = _bulletFireTime;
         GetComponent<Health>().Name = this.ToString();
         GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerLost;
+        _weapon = GetComponent<Weapon>();
     }
 
     private void Update()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            RequestFireBullet();
+            _weapon.FireBullet();
         }
 
     }
@@ -32,23 +29,6 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         CheckMovement();
-    }
-
-    private void FireBullet(GameObject bulletObject)
-    {
-        Transform transform = GetComponent<Transform>();
-        GameObject bullet = Instantiate(bulletObject, transform.position, transform.rotation) as GameObject;
-        bullet.GetComponent<BulletBehaviour>().Fire(BulletDirection.Up, gameObject);
-    }
-
-    private void RequestFireBullet()
-    {
-        _bulletTimePassed += Time.deltaTime;
-        if (_bulletTimePassed * FireSpeedModifier > _bulletFireTime)
-        {
-            FireBullet(CurrentBullet);
-            _bulletTimePassed = 0.0f;
-        }
     }
 
     private void CheckMovement()

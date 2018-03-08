@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BlackIceFight;
+using UnityEngine;
 
 public enum BulletDirection
 {
@@ -33,11 +34,28 @@ public class BulletBehaviour : MonoBehaviour
         }
     }
 
+    private bool IsTargetType(GameObject other, GameObject self)
+    {
+        Weapon otherWeapon = other.GetComponent<Weapon>();
+        Weapon selfWeapon = self.GetComponent<Weapon>();
+        bool result = false;
+        if (otherWeapon && selfWeapon)
+        {
+            if (otherWeapon.Type != selfWeapon.Type
+                && otherWeapon.Type != ObjectType.Bystander
+                && selfWeapon.Type != ObjectType.Bystander)
+            {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
-        if (targetRigidbody != null
-            && targetRigidbody != _origin.GetComponent<Rigidbody>())
+        if (targetRigidbody != null && IsTargetType(other.gameObject, _origin))
         {
             Health health = targetRigidbody.GetComponent<Health>();
             if (health != null)

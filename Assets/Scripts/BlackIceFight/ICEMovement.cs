@@ -19,7 +19,6 @@ public class ICEMovement : MonoBehaviour
         Random.InitState(Time.frameCount);
         GetComponent<Health>().Name = this.ToString();
         GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerWins;
-//        weapon = GetComponent<Weapon>();
     }
 
     // Update is called once per frame
