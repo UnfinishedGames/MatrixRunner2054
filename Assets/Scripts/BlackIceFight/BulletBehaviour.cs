@@ -36,29 +36,19 @@ public class BulletBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
-        if (targetRigidbody != null)
+        if (targetRigidbody != null
+            && targetRigidbody != _origin.GetComponent<Rigidbody>())
         {
-            PlayerHealth player = targetRigidbody.GetComponent<PlayerHealth>();
-            ICEMovement ice = targetRigidbody.GetComponent<ICEMovement>();
-            if (player != null && _origin.GetComponent<PlayerHealth>() != player)
+            Health health = targetRigidbody.GetComponent<Health>();
+            if (health != null)
             {
-                player.TakeDamage(damage);
+                health.TakeDamage(damage);
 //                AudioSource.PlayClipAtPoint(hitSound, transform.position, 10.0f);
                 Destroy(gameObject);
             }
-            else if (ice != null && _origin.GetComponent<ICEMovement>() != ice)
-            {
-                ice.TakeDamage(damage);
-//                AudioSource.PlayClipAtPoint(hitSound, transform.position, 10.0f);
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            // If we destroy the object here, we need to check if we hit friendy objects like the firewall or ourselfs
         }
     }
-
+    
     public void Fire(BulletDirection bulletDirection, GameObject origin)
     {
 //        AudioSource.PlayClipAtPoint(shootSound, transform.position);

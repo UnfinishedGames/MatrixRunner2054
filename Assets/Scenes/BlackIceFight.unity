@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -480,6 +479,7 @@ GameObject:
   - component: {fileID: 487926053}
   - component: {fileID: 487926052}
   - component: {fileID: 487926051}
+  - component: {fileID: 487926054}
   m_Layer: 0
   m_Name: ICEProcessMonitor
   m_TagString: Untagged
@@ -553,6 +553,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 487926049}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &487926054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487926049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e0cc5dac9654715ad0c04bebb2126d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 1754513279}
+  FireSpeedModifier: 1
+  Direction: -1
 --- !u!1 &932357745
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +622,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -639,6 +652,7 @@ GameObject:
   - component: {fileID: 1581232086}
   - component: {fileID: 1581232090}
   - component: {fileID: 1581232092}
+  - component: {fileID: 1581232093}
   - component: {fileID: 1581232091}
   m_Layer: 0
   m_Name: Player
@@ -750,9 +764,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87f654ea52b84de0b176c21790069b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
   FireSpeedModifier: 2
+  MovementModifier: 0.05
   CurrentBullet: {fileID: 1754513279}
+--- !u!114 &1581232093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1581232085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7863b50fcacb40a58bb53f7e901c998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 100
 --- !u!1 &1628546803
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,6 +875,8 @@ GameObject:
   - component: {fileID: 1658136911}
   - component: {fileID: 1658136910}
   - component: {fileID: 1658136914}
+  - component: {fileID: 1658136917}
+  - component: {fileID: 1658136916}
   - component: {fileID: 1658136915}
   m_Layer: 0
   m_Name: ICEMain
@@ -938,9 +966,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RangeX: 3
   Speed: 1
-  GenericBullet: {fileID: 1754513279}
-  SweeperBullet: {fileID: 290990222}
-  FireSpeedModifier: 2
 --- !u!54 &1658136915
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -956,6 +981,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1658136916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1658136909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7863b50fcacb40a58bb53f7e901c998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 2
+--- !u!114 &1658136917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1658136909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e0cc5dac9654715ad0c04bebb2126d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 1754513279}
+  FireSpeedModifier: 1
+  Direction: -1
 --- !u!1 &1754513279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1216,7 @@ GameObject:
   - component: {fileID: 1870281075}
   - component: {fileID: 1870281078}
   - component: {fileID: 1870281077}
+  - component: {fileID: 1870281079}
   - component: {fileID: 1870281076}
   m_Layer: 0
   m_Name: ICEVirusScanner
@@ -1239,6 +1291,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1870281074}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1870281079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870281074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e0cc5dac9654715ad0c04bebb2126d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 290990222}
+  FireSpeedModifier: 1
+  Direction: -1
 --- !u!1 &1957906786
 GameObject:
   m_ObjectHideFlags: 0

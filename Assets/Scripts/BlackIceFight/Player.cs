@@ -2,25 +2,22 @@
 
 //using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public float startingHealth = 100;
     public float FireSpeedModifier = 1.0f;
+    public float MovementModifier = 0.01f;
 
     public GameObject CurrentBullet;
 
-    //    public Slider healthBar;
-    private float currentHealth;
-
-    //    public CountWins counter;
-    //    public GameObject playerSpawn;
     private float _bulletTimePassed = 0.0f;
     private const float _bulletFireTime = 1.0f;
-    private bool isMoving = false;
+    private bool _isMoving = false;
 
     private void Start()
     {
         _bulletTimePassed = _bulletFireTime;
+        GetComponent<Health>().Name = this.ToString();
+        GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerLost;
     }
 
     private void Update()
@@ -54,43 +51,18 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        currentHealth = startingHealth;
-//        UpdateHealthBar();
-//        transform.position = playerSpawn.transform.position;
-    }
-
-    public void TakeDamage(float amountOfDamage)
-    {
-        currentHealth -= amountOfDamage;
-//        UpdateHealthBar();
-        Debug.Log(currentHealth.ToString());
-        if (currentHealth <= 0)
-        {
-            PersistentEncounterStatus.Instance.status = EncounterStatus.PlayerLost;
-            Debug.Log("I am Dead!");
-//            counter.IAmDead(myName);
-        }
-    }
-
     private void CheckMovement()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             Rigidbody body = GetComponent<Rigidbody>();
-            body.MovePosition(body.position + Vector3.left * 0.01f);
+            body.MovePosition(body.position + Vector3.left * MovementModifier);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             Rigidbody body = GetComponent<Rigidbody>();
-            body.MovePosition(body.position + Vector3.right * 0.01f);
+            body.MovePosition(body.position + Vector3.right * MovementModifier);
         }
     }
-
-    //    private void UpdateHealthBar()
-    //    {
-    //        healthBar.value = currentHealth;
-    //    }
 }
