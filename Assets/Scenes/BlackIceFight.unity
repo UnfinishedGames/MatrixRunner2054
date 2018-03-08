@@ -480,6 +480,8 @@ GameObject:
   - component: {fileID: 487926052}
   - component: {fileID: 487926051}
   - component: {fileID: 487926054}
+  - component: {fileID: 487926056}
+  - component: {fileID: 487926055}
   m_Layer: 0
   m_Name: ICEProcessMonitor
   m_TagString: Untagged
@@ -541,7 +543,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 487926049}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -567,8 +569,35 @@ MonoBehaviour:
   Bullet: {fileID: 290990222}
   FireSpeedModifier: 0.9
   Direction: -1
-  Type: 1
   AutoFire: 1
+--- !u!54 &487926055
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487926049}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &487926056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487926049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7863b50fcacb40a58bb53f7e901c998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 100
+  Type: 1
 --- !u!1 &932357745
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 100
+  Type: 0
 --- !u!114 &1581232094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +824,6 @@ MonoBehaviour:
   Bullet: {fileID: 1754513279}
   FireSpeedModifier: 3
   Direction: 1
-  Type: 0
   AutoFire: 0
 --- !u!1 &1628546803
 GameObject:
@@ -1010,6 +1039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 2
+  Type: 1
 --- !u!114 &1658136917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,7 +1054,6 @@ MonoBehaviour:
   Bullet: {fileID: 1754513279}
   FireSpeedModifier: 2
   Direction: -1
-  Type: 1
   AutoFire: 1
 --- !u!1 &1754513279
 GameObject:
@@ -1237,6 +1266,8 @@ GameObject:
   - component: {fileID: 1870281077}
   - component: {fileID: 1870281079}
   - component: {fileID: 1870281076}
+  - component: {fileID: 1870281081}
+  - component: {fileID: 1870281080}
   m_Layer: 0
   m_Name: ICEVirusScanner
   m_TagString: Untagged
@@ -1298,7 +1329,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1870281074}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1324,8 +1355,35 @@ MonoBehaviour:
   Bullet: {fileID: 290990222}
   FireSpeedModifier: 1.2
   Direction: -1
-  Type: 1
   AutoFire: 1
+--- !u!54 &1870281080
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870281074}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1870281081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870281074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7863b50fcacb40a58bb53f7e901c998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 100
+  Type: 1
 --- !u!1 &1957906786
 GameObject:
   m_ObjectHideFlags: 0

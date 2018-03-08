@@ -1,48 +1,50 @@
-﻿using BlackIceFight;
-using UnityEngine;
+﻿using UnityEngine;
 
 //using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+namespace BlackIceFight
 {
-    public float MovementModifier = 0.01f;
-
-    private bool _isMoving = false;
-    private Weapon _weapon;
-
-    private void Start()
+    public class Player : MonoBehaviour
     {
-        GetComponent<Health>().Name = this.ToString();
-        GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerLost;
-        _weapon = GetComponent<Weapon>();
-    }
+        public float MovementModifier = 0.01f;
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Space))
+        private bool _isMoving = false;
+        private Weapon _weapon;
+
+        private void Start()
         {
-            _weapon.FireBullet();
+            GetComponent<Health>().Name = this.ToString();
+            GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerLost;
+            _weapon = GetComponent<Weapon>();
         }
 
-    }
-
-    private void FixedUpdate()
-    {
-        CheckMovement();
-    }
-
-    private void CheckMovement()
-    {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        private void Update()
         {
-            Rigidbody body = GetComponent<Rigidbody>();
-            body.MovePosition(body.position + Vector3.left * MovementModifier);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                _weapon.FireBullet();
+            }
+
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        private void FixedUpdate()
         {
-            Rigidbody body = GetComponent<Rigidbody>();
-            body.MovePosition(body.position + Vector3.right * MovementModifier);
+            CheckMovement();
+        }
+
+        private void CheckMovement()
+        {
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                Rigidbody body = GetComponent<Rigidbody>();
+                body.MovePosition(body.position + Vector3.left * MovementModifier);
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                Rigidbody body = GetComponent<Rigidbody>();
+                body.MovePosition(body.position + Vector3.right * MovementModifier);
+            }
         }
     }
 }

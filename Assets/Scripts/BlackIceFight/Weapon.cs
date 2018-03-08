@@ -8,7 +8,6 @@ namespace BlackIceFight
         public float FireSpeedModifier = 1.0f;
         public BulletDirection Direction = BulletDirection.Down;
         public const float _bulletFireTime = 1.0f;
-        public ObjectType Type;
         public bool AutoFire = true;
 
         private float _bulletTimePassed = 0.0f;

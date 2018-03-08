@@ -36,14 +36,14 @@ public class BulletBehaviour : MonoBehaviour
 
     private bool IsTargetType(GameObject other, GameObject self)
     {
-        Weapon otherWeapon = other.GetComponent<Weapon>();
-        Weapon selfWeapon = self.GetComponent<Weapon>();
-        bool result = false;
-        if (otherWeapon && selfWeapon)
+        var otherHealth = other.GetComponent<Health>();
+        var selfHealth = self.GetComponent<Health>();
+        var result = false;
+        if (otherHealth && selfHealth)
         {
-            if (otherWeapon.Type != selfWeapon.Type
-                && otherWeapon.Type != ObjectType.Bystander
-                && selfWeapon.Type != ObjectType.Bystander)
+            if (otherHealth.Type != selfHealth.Type
+                && otherHealth.Type != ObjectType.Bystander
+                && selfHealth.Type != ObjectType.Bystander)
             {
                 result = true;
             }
