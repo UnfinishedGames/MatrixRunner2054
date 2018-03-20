@@ -107,12 +107,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62a9bd23e9a71b4db7960c31f85250c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NodeLevel: 0
   leftObject: {fileID: 0}
   rightObject: {fileID: 0}
   upObject: {fileID: 0}
   downObject: {fileID: 0}
   Action: {fileID: 114117658069897418}
+  DefaultImage: {fileID: 21300000, guid: 9fa0fc8d4f53e7d489a6563d95553110, type: 3}
 --- !u!212 &212713258763853740
 SpriteRenderer:
   m_ObjectHideFlags: 1

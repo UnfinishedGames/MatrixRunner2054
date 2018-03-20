@@ -10,8 +10,10 @@ public class Node : MonoBehaviour
     public GameObject upObject;
     public GameObject downObject;
     public SpecificAction Action;
-
+    public Sprite DefaultImage;
     public Dictionary<Direction, Node> possibleDirections = null;
+
+    private Sprite actualImage;
     private SpriteRenderer mySprite;
     private State currentState = State.Initial;
     private IEncounter myEncounter = null;
@@ -19,6 +21,8 @@ public class Node : MonoBehaviour
     void Start()
     {
         mySprite = GetComponentInChildren<SpriteRenderer>();
+        actualImage = mySprite.sprite;
+        mySprite.sprite = DefaultImage;
     }
 
     void Update()
