@@ -1,11 +1,13 @@
 ﻿using System;
+using EncounterEngine.enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public sealed class PersistentEncounterStatus
 {
-    public PlayerMovement player;
+//    public PlayerMovement player;
     public EncounterStatus status = EncounterStatus.Unavailable;
+    public string currentFight = "";
     
     private static readonly PersistentEncounterStatus instance = new PersistentEncounterStatus();
 
@@ -30,5 +32,6 @@ public sealed class PersistentEncounterStatus
     public void Reset()
     {
         Instance.status = EncounterStatus.Unavailable;
+        currentFight = "";
     }
 }

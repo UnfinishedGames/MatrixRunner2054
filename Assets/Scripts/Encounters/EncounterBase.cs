@@ -8,11 +8,13 @@ public class EncounterBase : MonoBehaviour
     protected MissionManager missionManager;
     protected RectTransform actionIndicator;
     protected Text actionIndicatorText;
+    protected LevelManager levelManager;
     protected PlayerMovement thePlayer;
 
     internal void Initialize()
     {
         missionManager = FindObjectByName("MissionManager").GetComponent<MissionManager>();
+        levelManager = FindObjectByName("Levelmanager").GetComponent<LevelManager>();
         actionIndicator = FindObjectByName("HUDCanvas/ActionIndicator").GetComponent<RectTransform>();
         actionIndicatorText = FindObjectByName("HUDCanvas/ActionIndicator/ActionText").GetComponent<Text>();
     }

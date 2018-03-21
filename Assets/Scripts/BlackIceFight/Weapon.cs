@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BlackIceFight
 {
@@ -31,8 +32,18 @@ namespace BlackIceFight
             _bulletTimePassed += Time.deltaTime;
             if (_bulletTimePassed * FireSpeedModifier > _bulletFireTime)
             {
-                Transform currentTransform = GetComponent<Transform>();
-                GameObject bullet = Instantiate(Bullet, currentTransform.position, currentTransform.rotation);
+                var currentTransform = GetComponent<Transform>();
+                var bullet = Instantiate(Bullet, currentTransform.position, currentTransform.rotation);
+                var scene = SceneManager.GetSceneByName(PersistentEncounterStatus.Instance.currentFight);
+                if (scene.IsValid())
+                {
+                    SceneManager.MoveGameObjectToScene(bullet, scene);
+                }
+                else
+                {
+                    Debug.Log("Invalid Scene found " + PersistentEncounterStatus.Instance.currentFight);
+                }
+
                 bullet.GetComponent<BulletBehaviour>().Fire(Direction, gameObject);
                 _bulletTimePassed = 0.0f;
             }
