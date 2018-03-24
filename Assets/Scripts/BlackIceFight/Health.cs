@@ -7,6 +7,7 @@ namespace BlackIceFight
     {
         public float StartingHealth = 100;
         public ObjectType Type;
+        public ParticleSystem Explosion;
 
         private float _currentHealth = 2;
         private string _name;
@@ -40,10 +41,10 @@ namespace BlackIceFight
         private IEnumerator Flash()
         {
             var material = gameObject.GetComponent<Renderer>().material;
-            Color newColor = Color.Lerp(Color.red, _originalColor, _currentHealth / 100.0f);
+            Color newColor = Color.Lerp(Color.red, _originalColor, _currentHealth / StartingHealth);
             material.color = Color.white;
             yield return new WaitForSeconds(0.1f);
-            material.color = Color.grey;
+            material.color = Color.red;
             yield return new WaitForSeconds(0.2f);
             material.color = Color.white;
             yield return new WaitForSeconds(0.1f);
@@ -56,6 +57,18 @@ namespace BlackIceFight
             //        UpdateHealthBar();
         }
 
+        private void Die()
+        {
+            PersistentEncounterStatus.Instance.status = ResultOfDeath;
+            //Debug.Log(Name + " I am Dead!");
+            var currentTransform = GetComponent<Transform>();
+            var explosion = Instantiate(Explosion, currentTransform.position, currentTransform.rotation);
+            explosion.transform.Rotate(Vector3.up, 180.0f);
+            explosion.Play();
+            Destroy(explosion.gameObject, explosion.duration);
+            Destroy(gameObject);
+        }
+
         public void TakeDamage(float amountOfDamage)
         {
             _currentHealth -= amountOfDamage;
@@ -63,10 +76,7 @@ namespace BlackIceFight
             Debug.Log(Name + _currentHealth.ToString());
             if (_currentHealth <= 0)
             {
-                PersistentEncounterStatus.Instance.status = ResultOfDeath;
-                Debug.Log(Name + " I am Dead!");
-                Destroy(gameObject);
-//            counter.IAmDead(myName);
+                Die();
             }
         }
     }
