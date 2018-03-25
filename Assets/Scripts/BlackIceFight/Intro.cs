@@ -4,11 +4,15 @@ using BlackIceFight;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class intro : MonoBehaviour
+public class Intro : MonoBehaviour
 {
     // Use this for initialization
     void Start()
     {
+        if (PersistentEncounterStatus.Instance.currentFight == "")
+        {
+            PersistentEncounterStatus.Instance.currentFight = SceneManager.GetActiveScene().name;
+        }
     }
 
     // Update is called once per frame
