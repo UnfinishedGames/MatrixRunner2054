@@ -92,7 +92,7 @@ namespace BlackIceFight
         
         private void Die()
         {
-            //PersistentEncounterStatus.Instance.status = ResultOfDeath; // TODO: move to a monitoring instance
+            PersistentEncounterStatus.Instance.status = ResultOfDeath; // TODO: move to a monitoring instance
             //Debug.Log(Name + " I am Dead!");
             ShowDyingExplosion();
             InformParentOfDeath();
