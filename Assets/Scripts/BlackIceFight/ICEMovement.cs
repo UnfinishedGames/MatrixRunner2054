@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace BlackIceFight
 {
-    public class ICEMovement : MonoBehaviour
+    public class ICEMovement : PauseBehaviour
     {
         /// The absolute range the object can move within
         public float RangeX = 3.0f;
@@ -32,7 +32,10 @@ namespace BlackIceFight
         // Update is called once per frame
         void Update()
         {
-            Move();
+            if (!_pause)
+            {
+                Move();
+            }
         }
 
         /// <summary>
