@@ -87,7 +87,7 @@ MonoBehaviour:
   upObject: {fileID: 0}
   downObject: {fileID: 0}
   Action: {fileID: 0}
-  DefaultImage: {fileID: 21300000, guid: 9fa0fc8d4f53e7d489a6563d95553110, type: 3}
+  DefaultImage: {fileID: 0}
 --- !u!114 &114664238714087002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 34383f1486454be40a4062ffad7a403b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,5 +142,5 @@ SpriteRenderer:
   m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0

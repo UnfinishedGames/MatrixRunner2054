@@ -21,8 +21,6 @@ public class Node : MonoBehaviour
     void Start()
     {
         mySprite = GetComponentInChildren<SpriteRenderer>();
-        actualImage = mySprite.sprite;
-        mySprite.sprite = DefaultImage;
     }
 
     void Update()
