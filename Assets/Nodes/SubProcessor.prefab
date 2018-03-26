@@ -97,7 +97,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1445514483527040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611b04c377597b0449b5a103a6080e70, type: 3}
+  m_Script: {fileID: 11500000, guid: 76edb26802c97a64d87de23dcc8536fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NodeLevel: 0
@@ -115,6 +115,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -159,6 +160,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
