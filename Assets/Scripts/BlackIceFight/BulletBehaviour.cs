@@ -51,11 +51,13 @@ public class BulletBehaviour : MonoBehaviour
 
         return result;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
-        if (targetRigidbody != null && IsTargetType(other.gameObject, _origin))
+        if (targetRigidbody != null
+            && _origin != null
+            && IsTargetType(other.gameObject, _origin))
         {
             Health health = targetRigidbody.GetComponent<Health>();
             if (health != null)
@@ -66,13 +68,18 @@ public class BulletBehaviour : MonoBehaviour
             }
         }
     }
-    
-    public void Fire(BulletDirection bulletDirection, GameObject origin)
+
+
+
+    public void Fire(BulletDirection bulletDirection, GameObject origin, Quaternion rotation)
     {
 //        AudioSource.PlayClipAtPoint(shootSound, transform.position);
         _origin = origin;
         Destroy(gameObject, TIME_TO_LIVE_SEC);
         Rigidbody body = GetComponent<Rigidbody>();
-        body.AddForce(transform.up * (int)bulletDirection * ForwardForce);
+
+        var myVector = rotation * Vector3.up;
+        body.transform.rotation = rotation;
+        body.AddForce(myVector * (int) bulletDirection * ForwardForce);
     }
 }

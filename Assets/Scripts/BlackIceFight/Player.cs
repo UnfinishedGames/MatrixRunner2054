@@ -4,7 +4,7 @@
 
 namespace BlackIceFight
 {
-    public class Player : MonoBehaviour
+    public class Player : PauseBehaviour
     {
         public float MovementModifier = 0.01f;
 
@@ -20,16 +20,21 @@ namespace BlackIceFight
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (!_pause)
             {
-                _weapon.FireBullet();
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    _weapon.FireBullet();
+                }
             }
-
         }
 
         private void FixedUpdate()
         {
-            CheckMovement();
+            if (!_pause)
+            {
+                CheckMovement();
+            }
         }
 
         private void CheckMovement()

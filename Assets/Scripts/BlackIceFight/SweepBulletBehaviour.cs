@@ -5,7 +5,7 @@ namespace BlackIceFight
     public class SweepBulletBehaviour : BulletBehaviour
     {
 
-        public new void Fire(BulletDirection bulletDirection, GameObject origin)
+        public new void Fire(BulletDirection bulletDirection, GameObject origin, Quaternion rotation)
         {
 //        var quat = Quaternion.AngleAxis(30, new Vector3(0, 0, 1));
 //        var vect = quat * transform.up;

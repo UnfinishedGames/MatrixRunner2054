@@ -42,6 +42,7 @@ public class FightEncounter : EncounterBase, IEncounter
         Node iceStartNode = thePlayer.currentNode == theIce.startNode ? thePlayer.startNode : theIce.startNode;
         theIce.Reset(iceStartNode);
         thePlayer.GoOn();
+        levelManager.enabled = true;
         PersistentEncounterStatus.Instance.status = EncounterStatus.Unavailable;
     }
 
@@ -50,6 +51,7 @@ public class FightEncounter : EncounterBase, IEncounter
         isActive = true;
         this.thePlayer = player;
         thePlayer.Stay();
+        levelManager.enabled = false;
         PersistentEncounterStatus.Instance.status = EncounterStatus.OnGoing;
     }
 
@@ -62,11 +64,13 @@ public class FightEncounter : EncounterBase, IEncounter
             try
             {
                 SceneManager.LoadScene(EncounterType.ToString(), LoadSceneMode.Additive);
+                PersistentEncounterStatus.Instance.currentFight = EncounterType.ToString();
             }
             catch // TODO: wtf? why does this not work?
             {
                 Debug.LogError("Could not load scene " + EncounterType.ToString());
                 thePlayer.GoOn();
+                levelManager.enabled = true;
             }
         }
     }
