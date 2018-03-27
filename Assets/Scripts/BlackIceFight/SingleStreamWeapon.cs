@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace BlackIceFight
 {
-    public class Weapon : PauseBehaviour
+    public class SingleStreamWeapon : PauseBehaviour, IWeapon
     {
         public GameObject Bullet;
         public float FireSpeedModifier = 1.0f;

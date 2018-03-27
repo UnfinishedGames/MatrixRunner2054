@@ -7,15 +7,14 @@ namespace BlackIceFight
     public class Player : PauseBehaviour
     {
         public float MovementModifier = 0.01f;
+        public GameObject Weapon;
 
         private bool _isMoving = false;
-        private Weapon _weapon;
 
         private void Start()
         {
             GetComponent<Health>().Name = this.ToString();
             GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerLost;
-            _weapon = GetComponent<Weapon>();
         }
 
         private void Update()
@@ -24,7 +23,7 @@ namespace BlackIceFight
             {
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    _weapon.FireBullet();
+                    Weapon.GetComponent<IWeapon>().FireBullet();
                 }
             }
         }

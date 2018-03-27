@@ -12,6 +12,8 @@ namespace BlackIceFight
         /// The speed of the basic speed of the object - only to be set by the GUI
         public float Speed = 1.0f;
 
+        public GameObject[] WeaponTiers;
+
         /// Indicates if the object is currently moving - if not a new destination is calulated
         private bool _isMoving = false;
 
@@ -21,12 +23,20 @@ namespace BlackIceFight
         /// Modifies the current speed of the object - can be changed if some event occurs
         private float _speedModifier = 1.0f;
 
+        private int _currentWeaponIndex = 0;
+
         /// Use this for initialization
         void Start()
         {
             Random.InitState(Time.frameCount);
             GetComponent<Health>().Name = this.ToString();
             GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerWins;
+            foreach (GameObject weapon in WeaponTiers)
+            {
+                weapon.GetComponent<MonoBehaviour>().enabled = false;
+            }
+
+            WeaponTiers[0].GetComponent<MonoBehaviour>().enabled = true;
         }
 
         // Update is called once per frame
@@ -112,6 +122,12 @@ namespace BlackIceFight
         {
             //switchWeapon()
             _speedModifier *= 1.5f;
+            _currentWeaponIndex += 1;
+            if (WeaponTiers.Length > _currentWeaponIndex)
+            {
+                WeaponTiers[_currentWeaponIndex - 1].GetComponent<MonoBehaviour>().enabled = false;
+                WeaponTiers[_currentWeaponIndex].GetComponent<MonoBehaviour>().enabled = true;
+            }
         }
     }
 }
