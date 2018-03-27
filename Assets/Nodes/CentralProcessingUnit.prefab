@@ -101,6 +101,7 @@ MonoBehaviour:
   upObject: {fileID: 0}
   downObject: {fileID: 0}
   Action: {fileID: 0}
+  DefaultImage: {fileID: 0}
 --- !u!212 &212303577767605340
 SpriteRenderer:
   m_ObjectHideFlags: 1

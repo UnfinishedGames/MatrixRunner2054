@@ -10,8 +10,9 @@ public class Node : MonoBehaviour
     public GameObject upObject;
     public GameObject downObject;
     public SpecificAction Action;
-
+    public ShowUnknownSprite unknownSpriteSwitch;
     public Dictionary<Direction, Node> possibleDirections = null;
+
     private SpriteRenderer mySprite;
     private State currentState = State.Initial;
     private IEncounter myEncounter = null;
@@ -27,6 +28,12 @@ public class Node : MonoBehaviour
         InitializeForEditor();
         UpdateView();
     }
+
+    private void OnApplicationQuit()
+    {
+        mySprite.enabled = true;
+    }
+
 
     private void CheckEncounter()
     {
