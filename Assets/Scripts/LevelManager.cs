@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using MissionEngine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +38,6 @@ public class LevelManager : MonoBehaviour
         CheckVictoryConditions();
         CheckIfFightIsOn();
     }
-
     public Node TryToMovePlayer(Direction newDirection, Node currentNode)
     {
         var newCurrentNode = currentNode.getNeighbour(newDirection);
@@ -56,6 +54,10 @@ public class LevelManager : MonoBehaviour
         currentNode.Interact(player);
     }
 
+    internal void UncoverNeighbourNode()
+    {
+        UncoverNeighbourNodes();
+    }
 
     private bool PlayerAndIceAreInTheSameNode(PlayerMovement player, IceLocation ice)
     {
@@ -70,7 +72,7 @@ public class LevelManager : MonoBehaviour
             Application.Quit();
         }
     }
-
+    
     private void CheckVictoryConditions()
     {
         var state = missionManager.CheckMissionState();
@@ -135,5 +137,10 @@ public class LevelManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private void UncoverNeighbourNodes()
+    {
+        player.currentNode.UncoverNeighbourNodes();
     }
 }
