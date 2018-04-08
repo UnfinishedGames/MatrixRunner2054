@@ -65,11 +65,6 @@ internal class PlayerKeyInteractions
         return levelManager.TryToMovePlayer(direction, sourceNode);
     }
 
-    internal void UncoverNeighbourNodes()
-    {
-        levelManager.UncoverNeighbourNode();
-    }
-
     internal void PerformSpaceKeyInteraction(Node currentNode)
     {
         if (Input.GetKey(KeyCode.Space))

@@ -112,6 +112,7 @@ public class LevelManager : MonoBehaviour
                 if (true == player.Action())
                 {
                     gameState = GameState.GAMESTATE_ICE_ACTION;
+                    UncoverNeighbourNode();
                 }
                 break;
             }

@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentNode = keyInteractions.SetNodeForArrowInput(currentNode, releasedKey);
                 UpdateView();
-                keyInteractions.UncoverNeighbourNodes();
                 done = true;
             }
             keyInteractions.PerformSpaceKeyInteraction(currentNode); // TODO: auf done setzen, wenn Node gehackt

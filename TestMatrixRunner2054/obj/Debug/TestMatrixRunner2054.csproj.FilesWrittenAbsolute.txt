@@ -1,0 +1,6 @@
+/storage/projects/MatrixRunner2054/TestMatrixRunner2054/obj/Debug/.NETFramework,Version=v4.5.1.AssemblyAttribute.cs
+/storage/projects/MatrixRunner2054/TestMatrixRunner2054/bin/Debug/TestMatrixRunner2054.dll.mdb
+/storage/projects/MatrixRunner2054/TestMatrixRunner2054/bin/Debug/TestMatrixRunner2054.dll
+/storage/projects/MatrixRunner2054/TestMatrixRunner2054/obj/Debug/TestMatrixRunner2054.dll
+/storage/projects/MatrixRunner2054/TestMatrixRunner2054/obj/Debug/TestMatrixRunner2054.dll.mdb
+/storage/projects/MatrixRunner2054/TestMatrixRunner2054/bin/Debug/nunit.framework.dll
