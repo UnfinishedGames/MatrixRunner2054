@@ -54,24 +54,26 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
-        if (targetRigidbody != null
-            && _origin != null
-            && IsTargetType(other.gameObject, _origin))
+        Health targetRigidbody = other.GetComponentInParent<Health>();
+        if (targetRigidbody != null && _origin != null)
         {
-            Health health = targetRigidbody.GetComponent<Health>();
-            if (health != null)
+            Health originHealth = _origin.GetComponentInParent<Health>();
+            if( IsTargetType(other.gameObject, originHealth.gameObject))
             {
-                health.TakeDamage(damage);
+                Health health = targetRigidbody.GetComponent<Health>();
+                if (health != null)
+                {
+                    health.TakeDamage(damage);
 //                AudioSource.PlayClipAtPoint(hitSound, transform.position, 10.0f);
-                Destroy(gameObject);
+                    Destroy(gameObject);
+                }
             }
         }
     }
 
 
 
-    public void Fire(BulletDirection bulletDirection, GameObject origin, Quaternion rotation)
+    public virtual void Fire(BulletDirection bulletDirection, GameObject origin, Quaternion rotation)
     {
 //        AudioSource.PlayClipAtPoint(shootSound, transform.position);
         _origin = origin;

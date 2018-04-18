@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace BlackIceFight
 {
-    public class Weapon : MonoBehaviour
+    public class SingleStreamWeapon : PauseBehaviour, IWeapon
     {
         public GameObject Bullet;
         public float FireSpeedModifier = 1.0f;
@@ -25,7 +25,7 @@ namespace BlackIceFight
         // Update is called once per frame
         void Update()
         {
-            if (AutoFire)
+            if (AutoFire && !_pause)
             {
                 FireBullet();
             }

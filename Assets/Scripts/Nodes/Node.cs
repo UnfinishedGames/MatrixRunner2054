@@ -10,8 +10,9 @@ public class Node : MonoBehaviour
     public GameObject upObject;
     public GameObject downObject;
     public SpecificAction Action;
-
+    public ShowIngameSprite ingameSpriteSwitch;
     public Dictionary<Direction, Node> possibleDirections = null;
+
     private SpriteRenderer mySprite;
     private State currentState = State.Initial;
     private IEncounter myEncounter = null;
@@ -28,19 +29,25 @@ public class Node : MonoBehaviour
         UpdateView();
     }
 
+    private void OnApplicationQuit()
+    {
+        mySprite.enabled = true;
+    }
+
+
     private void CheckEncounter()
     {
-        if (this.myEncounter != null)
+        if (myEncounter != null)
         {
             if (myEncounter.Status() == EncounterStatus.PlayerLost)
             {
-                this.currentState = State.Blocked;
-                this.myEncounter = null;
+                currentState = State.Blocked;
+                myEncounter = null;
             }
             else if (myEncounter.Status() == EncounterStatus.PlayerWins)
             {
-                this.currentState = State.Hacked;
-                this.myEncounter = null;
+                currentState = State.Hacked;
+                myEncounter = null;
             }
             else
             {
@@ -79,11 +86,11 @@ public class Node : MonoBehaviour
 
     public void Interact(PlayerMovement player)
     {
-        if (this.myEncounter == null)
+        if (myEncounter == null)
         {
             PersistentEncounterStatus.Instance.Reset();
-            this.myEncounter = GetComponentInChildren<IEncounter>();
-            if (this.myEncounter != null)
+            myEncounter = GetComponentInChildren<IEncounter>();
+            if (myEncounter != null)
             {
                 myEncounter.Interaction(player);
             }
@@ -123,6 +130,18 @@ public class Node : MonoBehaviour
         if (Action != null)
         {
             Action.Interact(this, player, missionManager);
+        }
+    }
+
+    internal void UncoverNeighbourNodes()
+    {
+        if (possibleDirections == null || possibleDirections.Count == 0)
+        {
+            return;
+        }
+        foreach (var node in possibleDirections.Values)
+        {
+            node.ingameSpriteSwitch.SwitchSpecificSpriteOn();
         }
     }
 }

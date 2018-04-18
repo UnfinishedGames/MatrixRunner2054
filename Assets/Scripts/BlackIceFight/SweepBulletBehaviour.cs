@@ -5,16 +5,16 @@ namespace BlackIceFight
     public class SweepBulletBehaviour : BulletBehaviour
     {
 
-        public new void Fire(BulletDirection bulletDirection, GameObject origin, Quaternion rotation)
-        {
-//        var quat = Quaternion.AngleAxis(30, new Vector3(0, 0, 1));
-//        var vect = quat * transform.up;
-
-            Destroy(gameObject, TIME_TO_LIVE_SEC);
-            Rigidbody body = GetComponent<Rigidbody>();
-
-            body.AddForce(RotateZ(transform.up, 30) * (int)bulletDirection * ForwardForce);
-        }
+//        public override void Fire(BulletDirection bulletDirection, GameObject origin, Quaternion rotation)
+//        {
+////        var quat = Quaternion.AngleAxis(30, new Vector3(0, 0, 1));
+////        var vect = quat * transform.up;
+//
+//            Destroy(gameObject, TIME_TO_LIVE_SEC);
+//            Rigidbody body = GetComponent<Rigidbody>();
+//
+//            body.AddForce(RotateZ(transform.up, 30) * (int)bulletDirection * ForwardForce);
+//        }
 
         public Vector3 RotateX(Vector3 v, float angle)
         {

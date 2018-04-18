@@ -4,32 +4,36 @@
 
 namespace BlackIceFight
 {
-    public class Player : MonoBehaviour
+    public class Player : PauseBehaviour
     {
         public float MovementModifier = 0.01f;
+        public GameObject Weapon;
 
         private bool _isMoving = false;
-        private Weapon _weapon;
 
         private void Start()
         {
             GetComponent<Health>().Name = this.ToString();
             GetComponent<Health>().ResultOfDeath = EncounterStatus.PlayerLost;
-            _weapon = GetComponent<Weapon>();
         }
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (!_pause)
             {
-                _weapon.FireBullet();
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    Weapon.GetComponent<IWeapon>().FireBullet();
+                }
             }
-
         }
 
         private void FixedUpdate()
         {
-            CheckMovement();
+            if (!_pause)
+            {
+                CheckMovement();
+            }
         }
 
         private void CheckMovement()
