@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4932264059989078}
   - component: {fileID: 114519188828862076}
   - component: {fileID: 212282179851215964}
+  - component: {fileID: 114732626527452144}
   m_Layer: 0
   m_Name: BlackIce
   m_TagString: Untagged
@@ -64,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1235269660617958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -13.37, y: 5.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4542275504712856}
@@ -82,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c5ad8db988c4467af332f0d73f596b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EncounterType: 0
 --- !u!114 &114519188828862076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,7 +96,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentNode: {fileID: 0}
-  componentSheet: {fileID: 0}
+  componentSheet: {fileID: 114732626527452144}
+--- !u!114 &114732626527452144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1235269660617958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5f2665548b30943a31d730b4f3421c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SecurityCode: 0
+  SystemRating: 0
+  IceRating: 6
 --- !u!212 &212282179851215964
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -108,6 +124,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

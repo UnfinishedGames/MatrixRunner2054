@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4563150362104454}
   - component: {fileID: 114721958738483812}
   - component: {fileID: 212554345014048182}
+  - component: {fileID: 114481624160437338}
   m_Layer: 0
   m_Name: TarbabyIce
   m_TagString: Untagged
@@ -35,12 +36,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1729236882152106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.28, y: -2.69, z: 0}
+  m_LocalPosition: {x: -25, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114481624160437338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729236882152106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5f2665548b30943a31d730b4f3421c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SecurityCode: 0
+  SystemRating: 0
+  IceRating: 0
 --- !u!114 &114721958738483812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentNode: {fileID: 0}
-  componentSheet: {fileID: 0}
+  componentSheet: {fileID: 114481624160437338}
 --- !u!212 &212554345014048182
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -67,6 +82,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

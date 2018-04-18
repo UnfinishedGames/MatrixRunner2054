@@ -10,7 +10,7 @@ public class MissionManager : MonoBehaviour
     private D100RuleEngine ruleEngine;
 
     public RectTransform MissionIndicator;
-    public CatAndMouseMission CurrentMission;
+    public Mission CurrentMission;
 
     public D100RuleEngine RuleEngine
     {
