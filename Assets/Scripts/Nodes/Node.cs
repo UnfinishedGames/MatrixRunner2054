@@ -10,16 +10,17 @@ public class Node : MonoBehaviour
     public GameObject upObject;
     public GameObject downObject;
     public SpecificAction Action;
-    public ShowIngameSprite ingameSpriteSwitch;
     public Dictionary<Direction, Node> possibleDirections = null;
 
-    private SpriteRenderer mySprite;
+    private ShowIngameSprite ingameSprite;
+    private SpriteRenderer editorSprite;
     private State currentState = State.Initial;
     private IEncounter myEncounter = null;
 
     void Start()
     {
-        mySprite = GetComponentInChildren<SpriteRenderer>();
+        editorSprite = GetComponentInChildren<SpriteRenderer>();
+        ingameSprite = GetComponentInChildren<ShowIngameSprite>();
     }
 
     void Update()
@@ -31,7 +32,7 @@ public class Node : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        mySprite.enabled = true;
+        editorSprite.enabled = true;
     }
 
 
@@ -97,6 +98,41 @@ public class Node : MonoBehaviour
         }
     }
 
+    public void Access(PlayerCharacterSheet player, MissionManager missionManager)
+    {
+        if (Action != null)
+        {
+            Action.Interact(this, player, missionManager);
+        }
+    }
+
+    public void UncoverNeighbourNodes()
+    {
+        if (possibleDirections == null || possibleDirections.Count == 0)
+        {
+            return;
+        }
+        foreach (var node in possibleDirections.Values)
+        {
+            node.SwitchSpecificSpriteOn();
+        }
+    }
+
+    public void SwitchSpecificSpriteOn()
+    {
+        ingameSprite.SwitchSpecificSpriteOn();
+    }
+
+    public void ColorSpecificSprite(Color color)
+    {
+        ingameSprite.SetSpriteColor(color);
+    }
+    
+    public void GivePlayerAccess(PlayerCharacterSheet playerCharacterSheet, MissionManager missionManager)
+    {
+        Access(playerCharacterSheet, missionManager);
+    }
+
     private Node NodeFromObjectOrMyself(GameObject gameObj)
     {
         return gameObj != null ? gameObj.GetComponent<Node>() : this;
@@ -107,41 +143,16 @@ public class Node : MonoBehaviour
         switch (currentState)
         {
             case State.Initial:
-                mySprite.color = Color.white;
+                ColorSpecificSprite(Color.white);
                 break;
             case State.Hacked:
-                mySprite.color = Color.green;
+                ColorSpecificSprite(Color.green);
                 break;
             case State.Blocked:
-                mySprite.color = Color.red;
+                ColorSpecificSprite(Color.red);
                 break;
             default:
                 throw new ArgumentOutOfRangeException("currentState");
         }
-    }
-
-    internal void GivePlayerAccess(PlayerCharacterSheet playerCharacterSheet, MissionManager missionManager)
-    {
-        Access(playerCharacterSheet, missionManager);
-    }
-
-    internal void Access(PlayerCharacterSheet player, MissionManager missionManager)
-    {
-        if (Action != null)
-        {
-            Action.Interact(this, player, missionManager);
-        }
-    }
-
-    internal void UncoverNeighbourNodes()
-    {
-        if (possibleDirections == null || possibleDirections.Count == 0)
-        {
-            return;
-        }
-        foreach (var node in possibleDirections.Values)
-        {
-            node.ingameSpriteSwitch.SwitchSpecificSpriteOn();
-        }
-    }
+    }  
 }
