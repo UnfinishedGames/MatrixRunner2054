@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ShowIngameSprite : MonoBehaviour
 {
@@ -16,6 +17,17 @@ public class ShowIngameSprite : MonoBehaviour
     public void SwitchSpecificSpriteOn()
     {
         mySprite.sprite = SpecificImage;
+    }
+
+    public void SetSpriteColor(Color color)
+    {
+        if (WeAreInEditMode()) return;
+        mySprite.color = color;
+    }
+
+    private bool WeAreInEditMode()
+    {
+        return mySprite == null;
     }
 }
 
