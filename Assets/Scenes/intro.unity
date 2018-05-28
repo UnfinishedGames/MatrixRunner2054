@@ -211,6 +211,18 @@ GameObject:
   m_PrefabParentObject: {fileID: 1714408191242042, guid: 4b0a5054b806dcd4d999020051ffde17,
     type: 2}
   m_PrefabInternal: {fileID: 383016921}
+--- !u!114 &46013617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 46013613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f24ce238135ca8488850d15bee2376c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amount: 333
 --- !u!1 &47248965
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +328,18 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1518162978}
   m_Script: {fileID: 11500000, guid: b62a9bd23e9a71b4db7960c31f85250c, type: 3}
+--- !u!114 &94385324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 94385320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f24ce238135ca8488850d15bee2376c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amount: 666
 --- !u!114 &96949581 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114857185830419564, guid: 37b93599ca8d6e140a7117bea652bc8f,
@@ -610,7 +634,6 @@ MonoBehaviour:
   upObject: {fileID: 0}
   downObject: {fileID: 0}
   Action: {fileID: 0}
-  ingameSpriteSwitch: {fileID: 543040592}
 --- !u!212 &208787547
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -920,6 +943,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114597668148314206, guid: 4b0a5054b806dcd4d999020051ffde17,
+        type: 2}
+      propertyPath: Action
+      value: 
+      objectReference: {fileID: 46013617}
     m_RemovedComponents:
     - {fileID: 114249731386536080, guid: 4b0a5054b806dcd4d999020051ffde17, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4b0a5054b806dcd4d999020051ffde17, type: 2}
@@ -1792,7 +1820,7 @@ Prefab:
         type: 2}
       propertyPath: Action
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1731080103}
     - target: {fileID: 114597668148314206, guid: 4b0a5054b806dcd4d999020051ffde17,
         type: 2}
       propertyPath: unknownSpriteSwitch
@@ -1928,6 +1956,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: f736d10c7699a1a4b8c059ef24c987b1,
         type: 3}
+    - target: {fileID: 114597668148314206, guid: 4b0a5054b806dcd4d999020051ffde17,
+        type: 2}
+      propertyPath: Action
+      value: 
+      objectReference: {fileID: 94385324}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 114117658069897418, guid: 4b0a5054b806dcd4d999020051ffde17, type: 2}
@@ -2082,6 +2115,18 @@ GameObject:
   m_PrefabParentObject: {fileID: 1714408191242042, guid: 4b0a5054b806dcd4d999020051ffde17,
     type: 2}
   m_PrefabInternal: {fileID: 1478380525}
+--- !u!114 &1731080103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1731080099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0dbab93db2f9b64ab69197024751f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeBy: 5
 --- !u!114 &1758411612 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114839592897193476, guid: baf3c08f7bd4aaf479c4efe544a76b94,
