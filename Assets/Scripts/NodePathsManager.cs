@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Draws the paths between the nodes.
@@ -12,7 +14,6 @@ using UnityEngine;
 /// * draw only when a node was moved.
 /// </summary>
 
-[ExecuteInEditMode]
 public class NodePathsManager : MonoBehaviour {
 
     public GameObject path;
@@ -20,6 +21,17 @@ public class NodePathsManager : MonoBehaviour {
     private Dictionary<Node, List<Node> > pathStorage = new Dictionary<Node, List<Node> >();
 
     void Start()
+    {
+        ClearDrawnPaths();
+        SceneManager.sceneUnloaded += SceneManagerOnSceneUnloaded;
+    }
+
+    private void SceneManagerOnSceneUnloaded(Scene arg0)
+    {
+        ClearDrawnPaths();
+    }
+
+    public void OnApplicationQuit()
     {
         ClearDrawnPaths();
     }
