@@ -88,7 +88,7 @@ public class CatAndMouseImplementation
 
     private void SendTheBlackIce()
     {
-        blackIceToActivate.GoOn();
+        blackIceToActivate.Go();
     }
 
     private void IncreaseFunds(int fundsToAdd)

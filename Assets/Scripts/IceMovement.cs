@@ -20,7 +20,17 @@ public class IceMovement : IceLocation {
 
     }
 
+    public void Stop()
+    {
+        canMove = false;
+    }
+    
     public void GoOn()
+    {
+        canMove = true;
+    }
+
+    public void Go()
     {
         canMove = true;
         isVisible = true;

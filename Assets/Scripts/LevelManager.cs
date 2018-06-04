@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using MissionEngine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,11 +16,14 @@ public class LevelManager : MonoBehaviour
     public RectTransform gameOverIndicator;
     public MissionManager missionManager;
     public RectTransform moneyIndicator;
+    public RectTransform pauseMenu;
 
     private Text gameOverText;
     private Text moneyIndicatorText;
     private GameState gameState;
     private PlayerCharacterSheet playerCharacterSheet;
+    private bool showingMenu = false;
+    private List<IceMovement> mobileCountermeasures;
 
     void Start()
     {
@@ -29,6 +32,15 @@ public class LevelManager : MonoBehaviour
         gameOverText = gameOverIndicator.GetComponentInChildren<Text>();
         playerCharacterSheet = player.GetComponentInChildren<PlayerCharacterSheet>();
         moneyIndicatorText = moneyIndicator.GetComponentInChildren<Text>();
+        mobileCountermeasures = new List<IceMovement>();
+        pauseMenu.gameObject.SetActive(false);
+        foreach (IceLocation ice in countermeasures)
+        {
+            if(ice is IceMovement)
+            {
+                mobileCountermeasures.Add(ice as IceMovement);
+            }
+        }
     }
 
     void Update()
@@ -67,9 +79,28 @@ public class LevelManager : MonoBehaviour
 
     private void QuitOnEscape()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Application.Quit();
+            if(showingMenu)
+            {
+                showingMenu = false;
+                pauseMenu.gameObject.SetActive(false);
+                player.GoOn();
+                foreach(var ice in mobileCountermeasures)
+                {
+                    ice.GoOn();
+                }
+            }
+            else
+            {
+                showingMenu = true;
+                pauseMenu.gameObject.SetActive(true);
+                player.Stay();
+                foreach (var ice in mobileCountermeasures)
+                {
+                    ice.Stop();
+                }
+            }
         }
     }
     
