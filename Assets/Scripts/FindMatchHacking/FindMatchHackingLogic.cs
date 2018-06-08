@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -10,6 +11,9 @@ namespace FindMatchHacking
         /// The length of the encrypted list
         /// </summary>
         public int _listLength = 1000;
+        
+        private List<string> currentWords = new List<string>();
+
         /// <summary>
         /// The searched word - that is the word the player needs to guess
         /// </summary>
@@ -19,11 +23,17 @@ namespace FindMatchHacking
         /// The final list to show the player
         /// </summary>
         private string _encryptedList = "";
+
         /// <summary>
         /// Characters used to obfuscate the words in the list
         /// </summary>
-        private string _gibberish = "!§$%&/()=?*'#_-:.;,°^";
-
+        private string _gibberish = "!§$%&/()=?*'#_-:.;,°^0123456789";
+        
+        public List<string> CurrentWords
+        {
+            get { return currentWords; }
+        }
+        
         public string SearchedWord
         {
             get { return _searchedWord; }
@@ -35,6 +45,11 @@ namespace FindMatchHacking
             _random = new Random(seed);
         }
 
+        public string EncryptedList
+        {
+            get { return _encryptedList; }
+        }
+        
         private string GetGibberishString(int length)
         {
             string result = "";
@@ -54,7 +69,7 @@ namespace FindMatchHacking
                 // Call again - its very unlikely that we get our searched word twice
                 nextWord = wordList[_random.Next(wordList.Length)];
             }
-
+            currentWords.Add(nextWord);
             return nextWord;
         }
         
@@ -75,8 +90,9 @@ namespace FindMatchHacking
             string phraseToBePlaced = GetGibberishString(sizeOfSurrounding)
                                       + _searchedWord
                                       + GetGibberishString(sizeOfSurrounding);
-            _encryptedList = _encryptedList.Remove(positionForSearchedWord, phraseToBePlaced.Length);
-            return _encryptedList.Insert(positionForSearchedWord, phraseToBePlaced);
+            _encryptedList = _encryptedList.Remove(positionForSearchedWord, phraseToBePlaced.Length + sizeOfSurrounding * 2);
+            _encryptedList = _encryptedList.Insert(positionForSearchedWord, phraseToBePlaced);
+            return _encryptedList;
         }
 
         public string[] ReadWordList()
