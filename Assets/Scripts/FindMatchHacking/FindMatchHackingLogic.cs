@@ -123,19 +123,6 @@ namespace FindMatchHacking
             return _encryptedList;
         }
 
-//        public string[] ReadWordList()
-//        {
-//            try
-//            {
-//                return File.ReadAllLines(@"/storage/projects/MatrixRunner2054/Resources/FindMatchHacking/top1000de_utf-8.txt");
-//            }
-//            catch (Exception e)
-//            {
-//                Console.WriteLine(e);
-//                throw;
-//            }
-//        }
-
         public bool CheckPassword(string password)
         {
             return password.ToLower() == _searchedWord;
