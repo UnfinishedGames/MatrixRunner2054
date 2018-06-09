@@ -12,21 +12,27 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 	public Text TextWindow;
 	public Text HexWindow;
 	public Text SideWindow;
+	public Text MessageWindow;
 	public InputField InputBox;
 	public TextAsset WordList;
 	public Slider TimerSlider;
 	public float TimeInSeconds = 30;
 	
 	private FindMatchHacking.FindMatchHacking _hackingLogic;
-	private float StartTime = 0;
+	private float _startTime = 0;
+	private bool _pause = false;
 	
 	// Use this for initialization
 	void Start ()
 	{
-		StartTime = Time.time;
+		_startTime = Time.time;
 		var seed = (int) (Time.time * 100.0f);
 		_hackingLogic = new FindMatchHacking.FindMatchHacking(seed, WordList.text.Split('\n'));
-		
+
+		if (MessageWindow)
+		{
+			MessageWindow.transform.parent.gameObject.SetActive(false);
+		}
 		if (TextWindow)
 		{
 			TextWindow.text = _hackingLogic.GenerateList();
@@ -42,10 +48,6 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 				var hexString = BitConverter.ToString(ba).Substring(0,2);
 				HexWindow.text += hexString + " ";
 			}
-
-//			var hexString = BitConverter.ToString(ba);
-//			hexString = hexString.Replace("-", " ");
-//			HexWindow.text = hexString;
 		}
 
 		if (SideWindow)
@@ -60,20 +62,22 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 		if (InputBox)
 		{
 			InputBox.characterLimit = _hackingLogic.CurrentWords.Max(w => w.Length);
+			InputBox.ActivateInputField();
 		}
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		if (TimerSlider)
+		if (TimerSlider && !_pause)
 		{
-			TimerSlider.value = 1.0f - (Time.time - StartTime) / TimeInSeconds;
+			TimerSlider.value = 1.0f - (Time.time - _startTime) / TimeInSeconds;
 		}
 
-		if (Time.time - StartTime > TimeInSeconds)
+		if ((Time.time - _startTime > TimeInSeconds) && !_pause)
 		{
 			Debug.Log("You Loose");
+			SetEndContition(EncounterStatus.PlayerLost);
 		}
 	}
 
@@ -105,9 +109,40 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 
 		if (_hackingLogic.CheckPassword(input))
 		{
+			SetEndContition(EncounterStatus.PlayerWins);
 			Debug.Log("Winning!");
 		}
 
 		InputBox.ActivateInputField();
 	}
+
+	public void SetEndContition(EncounterStatus status)
+	{
+		InputBox.enabled = false;
+		_pause = true;
+		if (MessageWindow)
+		{
+			MessageWindow.transform.parent.gameObject.SetActive(true);
+
+			if (status == EncounterStatus.PlayerWins)
+			{
+				MessageWindow.text = "Successful hack!";
+			}
+			else if (status == EncounterStatus.PlayerLost)
+			{
+				MessageWindow.text = "You have been caught! You're screwed.";
+				MessageWindow.color = Color.red;
+			}
+		}
+
+		StartCoroutine(ExecuteAfterTime(5, status));
+	}
+	
+	private IEnumerator ExecuteAfterTime(float time, EncounterStatus status)
+	{
+		yield return new WaitForSeconds(time);
+
+		PersistentEncounterStatus.Instance.status = status;
+		Debug.Log("Ending FindMatchHacking");
+	} 
 }

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HackingSlider.unity
     guid: eecd6c6f2e5c846afbfcd6e4d6374d61
+  - enabled: 1
+    path: Assets/Scenes/HackingFindMatch.unity
+    guid: 639a795ea250d4a37ab857e2bc0d0c98
   m_configObjects: {}
