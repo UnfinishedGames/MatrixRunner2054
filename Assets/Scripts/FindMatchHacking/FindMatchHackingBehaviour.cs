@@ -17,11 +17,13 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 	public TextAsset WordList;
 	public Slider TimerSlider;
 	public float TimeInSeconds = 30;
-	
+	public AudioSource FailedSound;
+	public AudioSource SuccessSound;
+
 	private FindMatchHacking.FindMatchHacking _hackingLogic;
 	private float _startTime = 0;
 	private bool _pause = false;
-	
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -65,9 +67,9 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 			InputBox.ActivateInputField();
 		}
 	}
-	
+
 	// Update is called once per frame
-	void FixedUpdate () 
+	void FixedUpdate ()
 	{
 		if (TimerSlider && !_pause)
 		{
@@ -92,7 +94,7 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 			char[] characterArray = {character};
 			byte[] ba = Encoding.UTF8.GetBytes(characterArray);
 			var hexString = BitConverter.ToString(ba).Substring(0,2);
-			
+
 			if (charList.Contains(character))
 			{
 				TextWindow.text += "<color=red>" + character + "</color>";
@@ -111,6 +113,11 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 		{
 			SetEndContition(EncounterStatus.PlayerWins);
 			Debug.Log("Winning!");
+			SuccessSound.Play();
+		}
+		else
+		{
+			FailedSound.Play();
 		}
 
 		InputBox.ActivateInputField();
@@ -137,12 +144,12 @@ public class FindMatchHackingBehaviour : MonoBehaviour
 
 		StartCoroutine(ExecuteAfterTime(5, status));
 	}
-	
+
 	private IEnumerator ExecuteAfterTime(float time, EncounterStatus status)
 	{
 		yield return new WaitForSeconds(time);
 
 		PersistentEncounterStatus.Instance.status = status;
 		Debug.Log("Ending FindMatchHacking");
-	} 
+	}
 }
